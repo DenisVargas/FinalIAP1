@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59303af4c07ea5428e66474aff299e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _anims: {fileID: 0}
+  _anims: {fileID: 2218453324083772257}
   stateType: 1
 --- !u!114 &4293770308125346495
 MonoBehaviour:
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73550b1b66d6ae4d9f62080e47c0438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _anims: {fileID: 0}
+  _anims: {fileID: 2218453324083772257}
   stateType: 2
 --- !u!114 &5096988694175669514
 MonoBehaviour:
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7abde911ab66574cb613704bf033a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _anims: {fileID: 0}
-  stateType: 8
+  _anims: {fileID: 2218453324083772257}
+  stateType: 3
   attackRange: 1.5
   damage: 5
 --- !u!114 &9052404687937653228
@@ -146,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 7649327529784357947}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: edb0319fe096ea042a1e03d8fb067d21, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   health: 100
   AttackRange: 1.5
   sight: {fileID: 9052404687937653228}
-  anims: {fileID: 0}
+  anims: {fileID: 2218453324083772257}
 --- !u!1001 &1013654048645078334
 PrefabInstance:
   m_ObjectHideFlags: 0
