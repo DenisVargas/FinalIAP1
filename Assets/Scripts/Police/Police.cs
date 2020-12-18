@@ -32,10 +32,10 @@ public class Police : MonoBehaviour, IDamageable<Damage, HitResult>
         var idle = GetComponent<IdleState>().SetAnimator(anims).AttachTo(_states, true);
 
         //Attack
-        PoliceShootState shoot = GetComponent<PoliceShootState>();
+       /* PoliceShootState shoot = GetComponent<PoliceShootState>();
         shoot.OnAttackEnded += AttackCompleted;
         setAttackTarget += shoot.SetTarget;
-        shoot.AttachTo(_states);
+        shoot.AttachTo(_states);*/
 
         //Move
         MoveToState mv = GetComponent<MoveToState>();
@@ -47,11 +47,11 @@ public class Police : MonoBehaviour, IDamageable<Damage, HitResult>
         var dead = GetComponent<DeadState>().SetAnimator(anims).AttachTo(_states);
 
         idle.AddTransition(mv, (cs) => { print("Transitioning!"); })
-            .AddTransition(shoot)
+            //.AddTransition(shoot)
             .AddTransition(dead, (cs) => { print("Transitioning to Dead from Idle"); });
 
         mv.AddTransition(idle, (cs) => { print("Transitioning!"); })
-          .AddTransition(shoot)
+         // .AddTransition(shoot)
           .AddTransition(dead, (cs) => { });
 
         dead.AddTransition(dead, (cs) => { print("Transitioning"); })
