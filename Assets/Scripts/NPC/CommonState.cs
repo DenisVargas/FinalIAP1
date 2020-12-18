@@ -8,5 +8,6 @@
     pursue,
     flee,
     moveTo,
+    shoot,
     alert
 }
