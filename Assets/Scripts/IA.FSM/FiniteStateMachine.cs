@@ -40,10 +40,17 @@ namespace IA.FSM
         }
         public void AddState(IState<T> state)
         {
-            if (States.ContainsKey(state.getStateType))
+            var stateType = state.getStateType;
+            if (States.ContainsKey(stateType))
+            {
                 States[state.getStateType] = state;
+                Debug.Log("El estado existe");
+            }
             else
+            {
                 States.Add(state.getStateType, state);
+                Debug.Log("El estado no existe");
+            }
         }
     }
 }

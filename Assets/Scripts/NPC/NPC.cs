@@ -5,7 +5,6 @@ using IA.LineOfSight;
 using IA.PathFinding;
 using IA.FSM;
 
-[RequireComponent(typeof(Animator))]
 public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>
 {
     [SerializeField] int health = 100;
@@ -16,6 +15,8 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>
     [SerializeField] FiniteStateMachine<CommonState> _states;
     [SerializeField] Node _initialTarget;
 
+    public bool LiderUnit = false;
+
     Action<IDamageable<Damage, HitResult>> setAttackTarget = delegate { };
 
     public bool IsAlive => health > 0;
@@ -23,14 +24,20 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>
     // Start is called before the first frame update
     void Awake()
     {
-        anims = GetComponent<Animator>();
-        solver = GetComponent<PathFindSolver>();
+        if (!anims)
+            anims = GetComponent<Animator>();
+        if (!solver)
+            solver = GetComponent<PathFindSolver>();
 
         #region StateMachine
 
         _states = new FiniteStateMachine<CommonState>();
 
         var idle = GetComponent<IdleState>().SetAnimator(anims).AttachTo(_states, true);
+
+        //Follow Leader
+        FollowLeaderState fl = GetComponent<FollowLeaderState>();
+        fl.AttachTo(_states);
 
         //Attack
         AttackState attack = GetComponent<AttackState>();
@@ -49,32 +56,40 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>
 
         idle.AddTransition(mv, (cs) => { print("Transitioning!"); })
             .AddTransition(attack)
+            .AddTransition(fl)
             .AddTransition(dead, (cs) => { print("Transitioning to Dead from Idle"); });
 
         mv.AddTransition(idle, (cs) => { print("Transitioning!"); })
           .AddTransition(attack)
+          .AddTransition(fl)
           .AddTransition(dead, (cs) => { });
 
         dead.AddTransition(dead, (cs) => { print("Transitioning"); })
             .AddTransition(idle, (cs) => { });
 
         #endregion
+
+        if (_states.getCurrentStateType() != CommonState.followLeader && !LiderUnit)
+            _states.Feed(CommonState.followLeader);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (LiderUnit)
         {
-            _states.Feed(CommonState.moveTo);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            _states.Feed(CommonState.dead);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _states.Feed(CommonState.attack);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _states.Feed(CommonState.moveTo);
+            }
+            //if (Input.GetKeyDown(KeyCode.Alpha0))
+            //{
+            //    _states.Feed(CommonState.dead);
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    _states.Feed(CommonState.attack);
+            //}
         }
 
         _states.Update();

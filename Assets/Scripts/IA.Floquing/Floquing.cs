@@ -216,7 +216,7 @@ namespace IA.Floquing
                 {
                     //Modificación de la fórmula donde: D-Rm/RM - Rm, donde: D = distancia, Rm = radio menor, RM radio mayor.
                     float strenght = (distToTarget - minAvoidanceRadious) / (maxAvoidanceRadius - minAvoidanceRadious);
-                    Debug.Log("strenght is: " + strenght);
+                    //Debug.Log("strenght is: " + strenght);
 
                     //Magnitude modifier es un postprocesado al valor del peso.
                     weight = MagnitudeModifier(strenght);
