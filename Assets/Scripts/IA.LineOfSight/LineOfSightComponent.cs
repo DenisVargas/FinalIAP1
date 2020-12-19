@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+//Buscar una manera de que el Line of SightComponent soporte varios rangos!
 
 namespace IA.LineOfSight
 {
@@ -86,6 +89,61 @@ namespace IA.LineOfSight
                 return hitInfo.transform == target;
 
             return false;
+        }
+        /// <summary>
+        /// Indica si el objetivo específicado está dentro de la línea de visión
+        /// </summary>
+        /// <param name="target">Objetivo a comprobar</param>
+        /// <param name="range">Rango máximo de visión</param>
+        /// <param name="angle">Ángulo máximo de visión</param>
+        /// <param name="visibles">Filtro para los objetos visibles</param>
+        /// <returns>Verdadero si el Objetivo específicado está dentro de la línea de visión</returns>
+        public bool IsInSight(Transform target, float range, float angle, LayerMask visibles)
+        {
+            if (target == null)
+            {
+                Debug.Log("El target es inválido");
+                return false;
+            }
+
+            positionDiference = (target.position - transform.position);
+            distanceToTarget = positionDiference.magnitude;
+            Vector3 BidimensionalProjection = positionDiference.YComponent(0);
+            angleToTarget = Vector3.Angle(transform.forward, BidimensionalProjection);
+            dirToTarget = positionDiference.normalized;
+
+            dirToTarget = positionDiference.normalized;
+
+            if (distanceToTarget > range || angleToTarget > angle) return false;
+
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, dirToTarget, out hitInfo, range + 1, visibles))
+                return hitInfo.transform == target;
+
+            return false;
+        }
+
+        public List<Transform> GetAllVisibles(Vector3 origin, LayerMask visibles)
+        {
+            List<Transform> visibleAgents = new List<Transform>();
+            Collider[] closerEntities = Physics.OverlapSphere(origin, range, visibles); //chequeo mi entorno.
+
+            foreach (var item in closerEntities)
+                if (IsInSight(item.transform))
+                    visibleAgents.Add(item.transform);
+
+            return visibleAgents;
+        }
+        public List<Transform> GetAllVisibles(Vector3 origin, float range, float angle, LayerMask visibles)
+        {
+            List<Transform> visibleAgents = new List<Transform>();
+            Collider[] closerEntities = Physics.OverlapSphere(origin, range, visibles); //chequeo mi entorno.
+
+            foreach (var item in closerEntities)
+                if (IsInSight(item.transform, range, angle, visibles))
+                    visibleAgents.Add(item.transform);
+
+            return visibleAgents;
         }
     }
 }
