@@ -35,6 +35,7 @@ public class Human : NPC
         idle.AttachTo(_states, true);
 
         var attack = GetComponent<AttackState>();
+        attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
         attack.AttachTo(_states);
 
@@ -42,6 +43,7 @@ public class Human : NPC
         dead.AttachTo(_states);
 
         idle.AddTransition(dead);
+        attack.AddTransition(idle);
         dead.AddTransition(idle);
     }
 

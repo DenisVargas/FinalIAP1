@@ -57,6 +57,7 @@ public class Zombie : NPC
 
         //Attack
         AttackState attack = GetComponent<AttackState>();
+        attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
         attack.AttachTo(_states);
 
@@ -78,6 +79,8 @@ public class Zombie : NPC
         pursue.AddTransition(attack)
               .AddTransition(dead)
               .AddTransition(idle);
+
+        attack.AddTransition(idle);
 
         move.AddTransition(idle, (cs) => { print("Transitioning!"); })
           .AddTransition(attack)

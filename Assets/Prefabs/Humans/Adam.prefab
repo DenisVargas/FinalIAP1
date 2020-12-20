@@ -95,6 +95,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2945921245905202043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749802138414926055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80577f7cea1cc7c4b81fbb69d45ab2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackActive:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackRecovery:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8449014663986936895
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,9 +131,9 @@ GameObject:
   - component: {fileID: 354888397}
   - component: {fileID: 354888396}
   - component: {fileID: 354888394}
+  - component: {fileID: 199556047}
   - component: {fileID: 199556045}
   - component: {fileID: 199556046}
-  - component: {fileID: 199556047}
   m_Layer: 0
   m_Name: Adam
   m_TagString: Human
@@ -199,6 +223,21 @@ MonoBehaviour:
   TargetNode: {fileID: 0}
   DebugDetectionRange: 0
   Debug_DetectionRangeColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &199556047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449014663986936895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617c97995025b4840afc1c7010870217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anims: {fileID: 8956068181170954067}
+  stateType: 2
+  debugThis: 0
 --- !u!114 &199556045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,22 +270,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 8956068181170954067}
   stateType: 1
+  collisions:
+  - {fileID: 5547127789689341306}
   multipleDeads: 0
---- !u!114 &199556047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8449014663986936895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 617c97995025b4840afc1c7010870217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anims: {fileID: 8956068181170954067}
-  stateType: 2
-  debugThis: 0
 --- !u!1001 &1778146604734714350
 PrefabInstance:
   m_ObjectHideFlags: 0

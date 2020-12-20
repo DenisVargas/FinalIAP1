@@ -69,10 +69,15 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>, IAgressor<Dama
         {
             if (col.CompareTag(targetTag))
             {
+                var damageable = col.GetComponentInParent<IDamageable<Damage, HitResult>>();
+
+                if (!damageable.IsAlive)
+                    continue;
+
                 float currentDistance = Vector3.Distance(col.transform.position, transform.position);
                 if (currentDistance < distance)
                 {
-                    closerTarget = col.GetComponentInParent<IDamageable<Damage, HitResult>>();
+                    closerTarget = damageable;
                     targetCollider = col;
                 }
             }

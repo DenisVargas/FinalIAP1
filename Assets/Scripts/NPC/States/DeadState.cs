@@ -3,6 +3,7 @@ using IA.FSM;
 
 public class DeadState : State
 {
+    [SerializeField] Collider[] collisions = new Collider[0];
     [SerializeField] bool multipleDeads = false;
 
     public override void Begin()
@@ -26,5 +27,8 @@ public class DeadState : State
             }
         else
             _anims.Play("Dead");
+
+        foreach (var item in collisions)
+            item.enabled = false;
     }
 }

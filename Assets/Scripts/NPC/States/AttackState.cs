@@ -7,6 +7,7 @@ using System;
 public class AttackState : State
 {
     public event Action OnAttackEnded = delegate { };
+    public Action<CommonState> swithStateTo = delegate { };
     public event Action<HitResult> OnApplyDamage = delegate { };
     public Func<IDamageable<Damage, HitResult>> getCurrentTarget = delegate{return null;};
 
@@ -55,7 +56,11 @@ public class AttackState : State
 
     public void OnAttackEnd()
     {
+        var target = getCurrentTarget();
         OnAttackEnded();
         Debug.Log("AttackState::AnimationEvent::EndoFAnimation");
+
+        if (target != null && !target.IsAlive)
+            swithStateTo(CommonState.idle);
     }
 }
