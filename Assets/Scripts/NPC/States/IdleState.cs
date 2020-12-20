@@ -13,6 +13,7 @@ public class IdleState : State
     public override void Begin()
     {
         UConsole.print("Im in idle");
+        _anims.SetBool("idle", true);
     }
     public override void Execute()
     {

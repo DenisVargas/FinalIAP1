@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -88,7 +89,7 @@ namespace IA.Floquing
 
         #endregion
 
-        #region Align
+        #region Alignment
 
         /// <summary>
         /// Calcula el vector Alignment.
@@ -114,24 +115,34 @@ namespace IA.Floquing
         #region Avoidance
 
         /// <summary>
-        /// Calcula el vector Avoidance.
+        /// Calcula el vector Avoidance. Este vector es el opuesto al vector que va desde el origen al objetivo.
         /// </summary>
         /// <param name="Origin">Vector posicion de origen del objeto A.</param>
         /// <param name="Target">Vector posicion de origen del objeto B.</param>
-        /// <param name="Magnitude">Magnitud del vector resultante.</param>
-        /// <returns>Vector3.Avoidance</returns>
-        public static Vector3 getAvoidance(this Transform Origin, Vector3 Target)
+        /// <param name="normalized">¿Se quiere el resultado normalizado?</param>
+        /// <returns>Retorna el vector de Avoidance normalizado</returns>
+        public static Vector3 getAvoidance(this Vector3 Origin, Vector3 Target, bool normalized = true)
         {
-            return ((Origin.position - Target).normalized);
+            return ( normalized ? (Origin - Target).normalized : (Origin - Target));
         }
         /// <summary>
-        /// Calcula el vector Avoidance.
+        /// Calcula el vector Avoidance. Este vector es el opuesto al vector que va desde el origen al objetivo.
         /// </summary>
         /// <param name="Origin">Vector posicion de origen del objeto A.</param>
-        /// <param name="Towards">Lista de vectores posicion de los objetos a evitar.</param>
-        /// <param name="Magnitude">Magnitud del vector resultante.</param>
-        /// <returns> Avoidance Vector with constant magnitude</returns>
-        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Towards, float Magnitude = 1f)
+        /// <param name="Target">Vector posicion de origen del objeto B.</param>
+        /// <param name="normalized">¿Se quiere el resultado normalizado?</param>
+        /// <returns>Retorna el vector de Avoidance normalizado</returns>
+        public static Vector3 getAvoidance(this Transform Origin, Transform Target, bool normalized = true)
+        {
+            return (normalized ? (Origin.position - Target.position).normalized : (Origin.position - Target.position));
+        }
+        /// <summary>
+        /// Retorna el vector resultante de todos los vectores Avoidance.
+        /// </summary>
+        /// <param name="Origin">Vector de posición origen</param>
+        /// <param name="Towards">Collección de posiciones de objetos a evadir</param>
+        /// <returns>El vector Avoidance sin normalizar</returns>
+        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Towards, bool normalized = false, float magnitudeModifier = 1f, float Scale = 1f)
         {
             if (!Towards.Any()) return Vector3.zero;
 
@@ -140,58 +151,31 @@ namespace IA.Floquing
 
             foreach (Transform Target in Towards)
             {
-                avoid += Origin.position - Target.position;
+                avoid += Origin.getAvoidance(Target, normalized);
                 targets++;
             }
 
-            return (avoid / targets).normalized * Magnitude;
+            return (avoid / targets) * Scale;
         }
-        /// <summary>
-        /// Retorna un vector de avoidance Pesado!. El peso se calcula en base a la distancia del obstaculo, cuando mas cercano mayor es su peso.
-        /// </summary>
-        /// <param name="Origin">origen del Objeto.</param>
-        /// <param name="Obstacles">Lista de Objetos "Obstáculos"</param>
-        /// <param name="avoidanceRadious">Radio máximo del Avoidance.</param>
-        /// <param name="Weight">Peso del Avoidance</param>
-        /// <returns>A weighted Avoidance Vector</returns>
-        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Obstacles, float avoidanceRadious, float Weight)
-        {
-            if (!Obstacles.Any()) return Vector3.zero;
 
-            Vector3 avoid = Vector3.zero;
-            int targets = 0;
-            Vector3 vecToTarget = Vector3.zero;
-
-            foreach (Transform Target in Obstacles)
-            {
-                vecToTarget = Origin.position - Target.position;
-                float distToTarget = vecToTarget.magnitude;
-
-                //Formula es D-R/R, donde D = distancia, R = radio.
-                float strenght = (distToTarget - avoidanceRadious) / avoidanceRadious;
-
-                avoid += (vecToTarget.normalized * (strenght * Weight));
-                targets++;
-            }
-
-            return (avoid / targets);
-        }
         /// <summary>
         /// Retorna un vector de avoidance Pesado!. El peso se calcula en base a la distancia del obstaculo, cuando mas cercano mayor es su peso, se puede escalar el vector!.
         /// </summary>
         /// <param name="Origin">origen del Objeto.</param>
         /// <param name="Obstacles">Lista de Objetos "Obstáculos"</param>
-        /// <param name="avoidanceRadious">Radio máximo del Avoidance.</param>
-        /// <param name="Weight">Peso del Avoidance</param>
-        /// <param name="scalingVector">El vector que se utiliza para escalar el resultado antes de la suma.</param>
+        /// <param name="maxAvoidanceRadius"></param>
+        /// <param name="minAvoidanceRadious"></param>
+        /// <param name="magnitudeModifier"></param>
+        /// <param name="normalized"></param>
+        /// <param name="Weight"></param>
         /// <returns>A weighted Avoidance Vector</returns>
-        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Obstacles, float avoidanceRadious, float Weight, Vector3 scalingVector)
+        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Obstacles, float maxAvoidanceRadius, float minAvoidanceRadious = 0, bool normalized = false, float magnitudeModifier = 1f, float Weight = 1f)
         {
             if (!Obstacles.Any()) return Vector3.zero;
 
-            Vector3 avoid = Vector3.zero;
-            int targets = 0;
-            Vector3 vecToTarget = Vector3.zero;
+            Vector3 avoid = Vector3.zero;       //
+            int targets = 0;                    //Cantidad de objetivos.
+            Vector3 vecToTarget = Vector3.zero; //Acumulador.
 
             foreach (Transform Target in Obstacles)
             {
@@ -199,14 +183,50 @@ namespace IA.Floquing
                 float distToTarget = vecToTarget.magnitude;
 
                 //Formula es D-R/R, donde: D = distancia, R = radio.
-                float strenght = (distToTarget - avoidanceRadious) / avoidanceRadious;
+                float strenght = (distToTarget - maxAvoidanceRadius) / maxAvoidanceRadius;
                 Debug.Log("strenght is: " + strenght);
 
-                avoid += ((vecToTarget.normalized).getScaled(scalingVector) * (strenght * Weight));
+                avoid += ((vecToTarget.normalized).ScaleTo(Weight) * (strenght * Weight));
                 targets++;
             }
 
-            return (avoid / targets);
+            return (avoid / targets);  //No escalo el resultado, el peso lo aplicamos a nivel individual.
+        }
+
+        public static Vector3 getAvoidance(this Transform Origin, IEnumerable<Transform> Obstacles, Func<float,float> MagnitudeModifier, float maxAvoidanceRadius, float minAvoidanceRadious = 0, bool avereage = false)
+        {
+            if (!Obstacles.Any()) return Vector3.zero;
+
+            Vector3 avoid = Vector3.zero;       //Acumulador.
+            int targets = 0;                    //Cantidad de objetivos.
+
+            foreach (Transform Target in Obstacles)
+            {
+                Vector3 vecToTarget = Origin.position - Target.position;
+                float distToTarget = vecToTarget.magnitude;
+                //Strenght es un numero que va de 0 a 1 y es un valor lerpeado.
+                
+                float weight = 1f;
+
+                if (distToTarget < minAvoidanceRadious) //Si esta dentro del radio mínimo
+                    weight = 1f;
+                else if (distToTarget > maxAvoidanceRadius) //Si está fuera del radio máximo.
+                    weight = 0f;
+                else
+                {
+                    //Modificación de la fórmula donde: D-Rm/RM - Rm, donde: D = distancia, Rm = radio menor, RM radio mayor.
+                    float strenght = (distToTarget - minAvoidanceRadious) / (maxAvoidanceRadius - minAvoidanceRadious);
+                    //Debug.Log("strenght is: " + strenght);
+
+                    //Magnitude modifier es un postprocesado al valor del peso.
+                    weight = MagnitudeModifier(strenght);
+                }
+
+                avoid += ((vecToTarget.normalized) * weight);
+                targets++;
+            }
+
+            return avereage ? (avoid / targets) : avoid;
         }
 
         #endregion
