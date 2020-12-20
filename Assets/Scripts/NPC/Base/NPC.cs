@@ -77,6 +77,7 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>, IAgressor<Dama
                 float currentDistance = Vector3.Distance(col.transform.position, transform.position);
                 if (currentDistance < distance)
                 {
+                    distance = currentDistance;
                     closerTarget = damageable;
                     targetCollider = col;
                 }

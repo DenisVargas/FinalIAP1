@@ -34,6 +34,11 @@ public class Human : NPC
         idle.CheckLineOfSight = lookForZombies;
         idle.AttachTo(_states, true);
 
+        var pursue = GetComponent<PursueState>();
+        pursue.getCurrentTarget = getTarget;
+        pursue.SwitchState = _states.Feed;
+        pursue.AttachTo(_states);
+
         var attack = GetComponent<AttackState>();
         attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
@@ -42,8 +47,16 @@ public class Human : NPC
         var dead = GetComponent<DeadState>();
         dead.AttachTo(_states);
 
-        idle.AddTransition(dead);
-        attack.AddTransition(idle);
+        idle.AddTransition(dead)
+            .AddTransition(pursue);
+
+        pursue.AddTransition(attack)
+              .AddTransition(idle);
+
+        attack.AddTransition(idle)
+              .AddTransition(pursue)
+              .AddTransition(dead);
+
         dead.AddTransition(idle);
     }
 
@@ -83,6 +96,7 @@ public class Human : NPC
         if (hitResult.killed)
         {
             //Busco un nuevo target, porque el actual ha morido!
+            _states.Feed(CommonState.idle);
         }
     }
 }
