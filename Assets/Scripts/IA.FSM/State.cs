@@ -45,7 +45,11 @@ namespace IA.FSM
                 transition.target.Begin();
                 return transition.target;
             }
-            else return this;
+            else
+            {
+                Debug.Log($"{stateType} no contiene una transicion válida para {input.ToString()}");
+                return this;
+            }
         }
 
         public State SetAnimator(Animator anim)

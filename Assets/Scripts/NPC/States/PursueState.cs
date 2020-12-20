@@ -14,43 +14,14 @@ public class PursueState : State
     [Header("PathFinding")]
     [SerializeField] PathFindSolver solver = null;
 
-    Action<CommonState> SwitchState = delegate { };
+    public Action<CommonState> SwitchState = delegate { };
+    public Func<IDamageable<Damage, HitResult>> getCurrentTarget = delegate { return null; };
 
+    //Esto es por si se mueve por nodos.
     IDamageable<Damage, HitResult> Target = null;
-    Node nextNode = null;
-
-    public override void Begin()
-    {
-        _anims.SetBool("Walking", true);
-    }
-
-    public override void Execute()
-    {
-        base.Execute();
-
-        if (Vector3.Distance(Target.transform.position, transform.position) > attackRange)
-        {
-            var Path = solver.getPathTo(transform.position, Target.transform.position);//Recalculo el path en cada frame.
-            if (Path != null)
-            {
-                //Calculamos la dirección al siguiente nodo en el camino.
-                nextNode = Path[0];
-                Vector3 vecToCurrentTarget = (nextNode.transform.position - transform.position);
-
-                transform.forward = vecToCurrentTarget.normalized;
-                transform.position += transform.forward * pursueSpeed * Time.deltaTime;
-            }
-        }
-        else
-        {
-            SwitchState(CommonState.attack);
-        }
-    }
-
-    public override void End()
-    {
-        _anims.SetBool("Walking", false);
-    }
+    Node _nextNode = null;           //El siguiente nodo al que nos moveremos.
+    Node _originNode = null;         //El nodo en el que iniciamos el movimiento.
+    Queue<Node> currentPath = new Queue<Node>();
 
     public void SetTarget(IDamageable<Damage, HitResult> subject)
     {
@@ -59,5 +30,72 @@ public class PursueState : State
     public void SetAttackRange(float range)
     {
         attackRange = range;
+    }
+
+    public override void Begin()
+    {
+        _anims.Play("Move");
+
+        //Obtengo la referencia al target Actual.
+        Target = getCurrentTarget();
+
+        //Calculo el camino inicial, si me muevo por nodos.
+    }
+
+    public override void Execute()
+    {
+        if (Target.IsAlive)
+        {
+            Vector3 dir = (Target.transform.position - transform.position);
+
+            if (dir.magnitude > attackRange)
+            {
+                //Esto es por si se mueve por nodos.
+                //if (currentPath.Count == 0)
+                //    CalculateNOdePathToTarget();
+
+                //if (Move(_originNode, _nextNode, 0.1f)) //LLegamos al nextNode, y debemos recalcular nuestros siguiente paso.
+                //    CalculateNOdePathToTarget();
+
+                Vector3 movement = dir.normalized * pursueSpeed * Time.deltaTime;
+                //Añadir obstacle avoidance.
+                transform.forward = dir.normalized;
+                transform.position += movement;
+                return;
+            }
+
+            SwitchState(CommonState.attack);
+        }
+        else
+        {
+            //var enemy = checkForNearbyEnemiges();
+            //if (enemy != null)
+            //{
+            //    Target = enemy;
+            //    return;
+            //}
+
+            SwitchState(CommonState.idle);
+        }
+    }
+
+    private void CalculateNOdePathToTarget()
+    {
+        var currentCloserNode = solver.getCloserNode(transform.position);
+        var closerTargetNode = solver.getCloserNode(Target.transform.position);
+        var Path = solver.getPathTo(currentCloserNode, closerTargetNode);//Recalculo el path cada vez que completo el movimiento al siguiente nodo.
+
+        currentPath = new Queue<Node>();
+        foreach (var node in Path)
+            currentPath.Enqueue(node);
+
+        if (Path != null && Path.Count > 0)
+        {
+            //Seteamos las referencias.
+            _originNode = currentPath.Dequeue();
+
+            if (Path.Count > 0)
+                _nextNode = currentPath.Dequeue();
+        }
     }
 }

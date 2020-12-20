@@ -18,12 +18,16 @@ public class PathFindSolver : MonoBehaviour
     #region DEBUG
 #if UNITY_EDITOR
     [Header(" ============== Debug ================")]
+    [SerializeField] bool DebugDetectionRange = false;
     [SerializeField] Color Debug_DetectionRangeColor = Color.red;
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Debug_DetectionRangeColor;
-        Gizmos.matrix = Matrix4x4.Scale(new Vector3(1, 0, 1));
-        Gizmos.DrawWireSphere(transform.position, _lookUpRange);
+        if (DebugDetectionRange)
+        {
+            Gizmos.color = Debug_DetectionRangeColor;
+            Gizmos.matrix = Matrix4x4.Scale(new Vector3(1, 0, 1));
+            Gizmos.DrawWireSphere(transform.position, _lookUpRange); 
+        }
     }
 #endif
     #endregion

@@ -7,46 +7,60 @@ using System;
 public class AttackState : State
 {
     public event Action OnAttackEnded = delegate { };
+    public Action<CommonState> swithStateTo = delegate { };
     public event Action<HitResult> OnApplyDamage = delegate { };
+    public Func<IDamageable<Damage, HitResult>> getCurrentTarget = delegate{return null;};
 
     [SerializeField] float attackRange = 1.5f;
-    [SerializeField] int damage = 10;
-    [SerializeField] IDamageable<Damage, HitResult> _attackTarget = null;
+    [SerializeField] Damage damage = new Damage();
 
+    #region DEBUGGING
+    [Header("============ DEBUG ============")]
+    [SerializeField] bool drawAttackRange = false;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.matrix = Matrix4x4.Scale(new Vector3(1, 0, 1));
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
+    } 
+    #endregion
 
     public override void Begin()
     {
-        _anims.SetBool("Attack", true);
+        _anims.Play("Attack");
         Debug.Log("AttackState::START");
     }
     public override void End()
     {
-        _anims.SetBool("Attack", false);
+        _anims.Play("Idle");
         Debug.Log("AttackState::END");
     }
 
-    /// <summary>
-    /// Permite setear un target!
-    /// </summary>
-    /// <param name="attackTarget"></param>
-    public void SetTarget(IDamageable<Damage, HitResult> attackTarget)
+    public void OnStartUp()
     {
-        _attackTarget = attackTarget;
+        Debug.Log("AttackState::AnimationEvent::Startup");
     }
 
-    void AnimEvent_OnAttackEnded()
+    public void OnActiveStart()
     {
-        OnAttackEnded();
+        Debug.Log("AttackState::AnimationEvent::Active");
+        var target = getCurrentTarget();
+        if (target != null && target.IsAlive)
+            OnApplyDamage(target.getHit(damage));
     }
-    void AnimEvent_OnActivePhase()
+
+    public void OnRecovery()
     {
-        if (_attackTarget != null)
-            OnApplyDamage(_attackTarget.getHit(new Damage() { damageAmmount = damage }));
+        Debug.Log("AttackState::AnimationEvent::Recovery");
+    }
+
+    public void OnAttackEnd()
+    {
+        var target = getCurrentTarget();
+        OnAttackEnded();
+        Debug.Log("AttackState::AnimationEvent::EndoFAnimation");
+
+        if (target != null && !target.IsAlive)
+            swithStateTo(CommonState.idle);
     }
 }
