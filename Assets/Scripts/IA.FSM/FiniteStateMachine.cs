@@ -17,11 +17,15 @@ namespace IA.FSM
         }
         public void Update()
         {
-            currentState.Execute();
+            if (currentState != null)
+                currentState.Execute();
+            else
+                Debug.LogWarning("El estado no ha sido asignado");
         }
         public void Feed(T input)
         {
-            currentState = currentState.transitionTo(input);
+            if (currentState != null)
+                currentState = currentState.transitionTo(input);
         }
         public void Feed(T input, T fallback)
         {
@@ -44,12 +48,12 @@ namespace IA.FSM
             if (States.ContainsKey(stateType))
             {
                 States[state.getStateType] = state;
-                Debug.Log("El estado existe");
+                //Debug.Log("El estado existe");
             }
             else
             {
                 States.Add(state.getStateType, state);
-                Debug.Log("El estado no existe");
+                //Debug.Log($"El estado no existe en la SM. Añadiendo {state.getStateType}");
             }
         }
     }

@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910750935292101467}
-  - component: {fileID: 910750935292101464}
+  - component: {fileID: 2413866732909333846}
   - component: {fileID: 84216842504821940}
   - component: {fileID: 7322808926891625850}
   - component: {fileID: 910750935292101465}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 910750935292101468}
   m_Layer: 0
   m_Name: ZombieA
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,10 +68,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 910750934942156709}
+  - {fileID: 6111434462139218247}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &910750935292101464
+--- !u!114 &2413866732909333846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,16 +81,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 910750935292101469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e5d04deae51b644a4ea5cb3ecd3b5e, type: 3}
+  m_Script: {fileID: 11500000, guid: 43d3d8d665d61484e8a4da12606a0849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 100
   AttackRange: 1.5
   sight: {fileID: 84216842504821940}
   anims: {fileID: 5206841603003617424}
   solver: {fileID: 7322808926891625850}
   _initialTarget: {fileID: 0}
   LiderUnit: 0
+  _disband: 0
+  Debug_CurrentState: 0
 --- !u!114 &84216842504821940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +108,7 @@ MonoBehaviour:
   visibles:
     serializedVersion: 2
     m_Bits: 4294967295
-  range: 3
+  range: 5
   angle: 45
   Debug_LineOfSight: 1
   rangeColor: {r: 1, g: 0.75969285, b: 0.3160377, a: 1}
@@ -133,6 +136,7 @@ MonoBehaviour:
   ProximityTreshold: 0.3
   OriginNode: {fileID: 0}
   TargetNode: {fileID: 0}
+  DebugDetectionRange: 0
   Debug_DetectionRangeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &910750935292101465
 MonoBehaviour:
@@ -148,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 5206841603003617424}
   stateType: 2
+  debugThis: 0
 --- !u!114 &910750935292101462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +168,7 @@ MonoBehaviour:
   _anims: {fileID: 5206841603003617424}
   stateType: 4
   _sight: {fileID: 84216842504821940}
+  _leader: {fileID: 0}
   Allies: []
   _moveSpeed: 3
   floquingAgentsLM:
@@ -202,6 +208,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  debugthisSHIT: 0
   debugAllies: []
   obstacles: []
   _sightAngleColor: {r: 1, g: 1, b: 1, a: 1}
@@ -275,7 +282,9 @@ MonoBehaviour:
   _anims: {fileID: 5206841603003617424}
   stateType: 3
   attackRange: 1.5
-  damage: 10
+  damage:
+    damageAmmount: 20
+  drawAttackRange: 0
 --- !u!114 &910750935292101468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,6 +299,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 5206841603003617424}
   stateType: 1
+--- !u!1 &3170918103239598488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6111434462139218247}
+  - component: {fileID: 5849457248727492284}
+  m_Layer: 0
+  m_Name: Trigger-Hitbox
+  m_TagString: Zombie
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6111434462139218247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170918103239598488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.124}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 910750935292101467}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5849457248727492284
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170918103239598488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.171156
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.58557796, z: 0}
 --- !u!95 &5206841603003617424
 Animator:
   serializedVersion: 3
@@ -309,6 +363,74 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1974482954563201895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4950408091562769941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80577f7cea1cc7c4b81fbb69d45ab2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910750935292101463}
+        m_MethodName: OnStartUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackActive:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910750935292101463}
+        m_MethodName: OnActiveStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackRecovery:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910750935292101463}
+        m_MethodName: OnRecovery
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910750935292101463}
+        m_MethodName: OnAttackEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4004418016017000220
 PrefabInstance:
   m_ObjectHideFlags: 0

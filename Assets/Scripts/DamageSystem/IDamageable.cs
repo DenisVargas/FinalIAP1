@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Interfaz que determina toda entidad que puede recibir daño.
@@ -25,6 +26,7 @@ public interface IAgressor<input, output>
     void onHit(output hitResult); //Se llama cuando la unidad hace daño a otra entidad.
 }
 
+[Serializable]
 public struct Damage
 {
     public int damageAmmount;
