@@ -28,6 +28,9 @@ public class AttackState : State
     public override void Begin()
     {
         _anims.Play("Attack");
+        var target = getCurrentTarget();
+        Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
+        transform.forward = dirToTarget;
         Debug.Log("AttackState::START");
     }
     public override void End()

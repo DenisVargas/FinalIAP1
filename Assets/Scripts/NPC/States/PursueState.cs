@@ -23,6 +23,8 @@ public class PursueState : State
     Node _originNode = null;         //El nodo en el que iniciamos el movimiento.
     Queue<Node> currentPath = new Queue<Node>();
 
+    public bool debug_this = false;
+
     public void SetTarget(IDamageable<Damage, HitResult> subject)
     {
         Target = subject;
@@ -44,6 +46,11 @@ public class PursueState : State
 
     public override void Execute()
     {
+        if (debug_this)
+        {
+            print("Debugging");
+        }
+
         if (Target.IsAlive)
         {
             Vector3 dir = (Target.transform.position - transform.position);

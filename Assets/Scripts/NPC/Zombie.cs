@@ -80,7 +80,8 @@ public class Zombie : NPC
               .AddTransition(dead)
               .AddTransition(idle);
 
-        attack.AddTransition(idle);
+        attack.AddTransition(idle)
+              .AddTransition(dead);
 
         move.AddTransition(idle, (cs) => { print("Transitioning!"); })
           .AddTransition(attack)
@@ -109,5 +110,36 @@ public class Zombie : NPC
 
         _states.Update();
         Debug_CurrentState = _states.getCurrentStateType();
+    }
+
+
+    public override HitResult getHit(Damage inputDamage)
+    {
+        HitResult result = new HitResult();
+
+        Debug.Log($"{gameObject.name} ha recibido daño.");
+
+        health = (health - inputDamage.damageAmmount);
+        if (health < 0)
+            health = 0;
+
+        if (healthDisplay)
+            healthDisplay.value = ((float)health) / ((float)maxhealth);
+
+        if (health <= 0)
+        {
+            Debug.Log($"{gameObject.name} ha morido.");
+            result.killed = true;
+
+            OnDie(this);
+            _states.Feed(CommonState.dead);
+        }
+
+        return result;
+    }
+    public override void onHit(HitResult hitResult)
+    {
+        base.onHit(hitResult);
+        print("TE cogi puto");
     }
 }

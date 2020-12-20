@@ -239,6 +239,7 @@ MonoBehaviour:
   pursueSpeed: 5
   attackRange: 2
   solver: {fileID: 7322808926891625850}
+  debug_this: 0
 --- !u!114 &910750935292101463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ MonoBehaviour:
   _anims: {fileID: 5206841603003617424}
   stateType: 1
   collisions: []
-  multipleDeads: 0
+  multipleDeads: 1
 --- !u!1 &3170918103239598488
 GameObject:
   m_ObjectHideFlags: 0
