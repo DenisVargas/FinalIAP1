@@ -9,11 +9,14 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>, IAgressor<Dama
     public Action<NPC> OnDie = delegate { };
 
     [SerializeField] protected int health = 100;
+    [SerializeField] protected int maxhealth = 100;
     [SerializeField] protected float AttackRange = 1.5f;
-    [SerializeField] protected LineOfSightComponent sight;
-    [SerializeField] protected Animator anims;
-    [SerializeField] protected PathFindSolver solver;
-    [SerializeField] protected FiniteStateMachine<CommonState> _states;
+    [SerializeField] protected LineOfSightComponent sight = null;
+    [SerializeField] protected Animator anims = null;
+    [SerializeField] protected PathFindSolver solver = null;
+    [SerializeField] protected HealthBar healthDisplay = null;
+
+    protected FiniteStateMachine<CommonState> _states = null;
 
     public bool IsAlive => health > 0;
 

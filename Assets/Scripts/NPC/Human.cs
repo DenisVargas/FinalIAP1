@@ -12,6 +12,8 @@ public class Human : NPC
 
     private void Awake()
     {
+        if (healthDisplay)
+            healthDisplay.value = 1f;
         _states = new FiniteStateMachine<CommonState>();
 
         Action lookForZombies = () =>
@@ -55,12 +57,18 @@ public class Human : NPC
 
         Debug.Log($"{gameObject.name} ha recibido daño.");
 
-        health -= inputDamage.damageAmmount;
+        health = (health - inputDamage.damageAmmount);
+        if (health < 0)
+            health = 0;
+
+        if (healthDisplay)
+            healthDisplay.value = ((float)health) / ((float)maxhealth);
+
         if (health <= 0)
         {
             Debug.Log($"{gameObject.name} ha morido.");
-            health = 0;
             result.killed = true;
+
             OnDie(this);
             _states.Feed(CommonState.dead);
         }
