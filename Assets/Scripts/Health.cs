@@ -23,8 +23,13 @@ public class Health : MonoBehaviour
     {
         currentHealth += amount;
         float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        OnHealthPcChanged = currentHealthPct;
+        OnHealthPcChanged(currentHealthPct);
     }
 
-
+    private void update()
+    {
+        //ponemos la condicion para q se le descuente vida
+        //llamamos a ModifyHealth(-10);  o al receive damage
+    }
+    
 }
