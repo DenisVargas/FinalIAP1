@@ -65,7 +65,7 @@ public class Zombie : NPC
         attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
         attack.AttachTo(_states);
-        ZombieAttackSound();
+        
 
         //Move
         MoveToState move = GetComponent<MoveToState>();
