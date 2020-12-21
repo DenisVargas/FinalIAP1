@@ -15,7 +15,7 @@ public class FollowLeaderState : State
 
     [Header("Group")]
     [SerializeField] Transform _leader = null;
-    [SerializeField] Transform[] Allies = new Transform[0];
+    [SerializeField] Transform[] Allies;
 
     [Header("General Settings")]
     [SerializeField] float _moveSpeed = 5f;
@@ -25,7 +25,7 @@ public class FollowLeaderState : State
     [SerializeField] float _floqRadius = 1f;
     [SerializeField] float _separationWeight = 1f;
     [SerializeField] float _cohetionWeight = 1f;
-    //[SerializeField] float _avoidanceWeight = 1f; //Esto es dinámico.
+    [SerializeField] float _avoidanceWeight = 1f;
 
     [Header("Obstacle Avoidance Settings")]
     [SerializeField] LayerMask obstaclesAgents = ~0;

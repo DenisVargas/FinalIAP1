@@ -57,7 +57,11 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>, IAgressor<Dama
     protected IDamageable<Damage, HitResult> FindCloserTarget(string targetTag, float range, LayerMask filter)
     {
         Collider[] posibleTargets = Physics.OverlapSphere(transform.position, range, filter);
-
+        //var closerTarget = posibleTargets
+        //                   .Where(x => x.gameObject.CompareTag(targetTag))
+        //                   .OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
+        //                   .Select(x => GetComponent<IDamageable<Damage, HitResult>>())
+        //                   .FirstOrDefault();
         IDamageable<Damage, HitResult> closerTarget = null;
         Collider targetCollider = null;
         float distance = float.MaxValue;
