@@ -454,7 +454,7 @@ MonoBehaviour:
   _anims: {fileID: 530891711552610564}
   stateType: 3
   ManagerSounds: {fileID: 1864357128801421392}
-  RifleShootS: {fileID: 8300000, guid: f333cf410acbf6b468fb3309b1520e66, type: 3}
+  AttackSoundS: {fileID: 8300000, guid: f333cf410acbf6b468fb3309b1520e66, type: 3}
   attackRange: 1.5
   damage:
     damageAmmount: 10
