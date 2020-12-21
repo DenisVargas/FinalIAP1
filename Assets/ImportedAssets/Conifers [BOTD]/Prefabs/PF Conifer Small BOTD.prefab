@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33652085307817142}
   - component: {fileID: 23968705409988316}
   - component: {fileID: 193788009003933028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Conifer Small BOTD LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4454104241866706}
   - component: {fileID: 227092337440914680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Conifer Small BOTD Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4689083990643298}
   - component: {fileID: 205709636835153214}
   - component: {fileID: 136614995598757014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PF Conifer Small BOTD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 1364922359172550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.74, y: 11.503391, z: 18.98}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4591230394645006}
   - {fileID: 4699967739435152}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 33710429429353474}
   - component: {fileID: 23713938712392732}
   - component: {fileID: 193038488901572242}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Conifer Small BOTD LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -352,7 +352,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   range: 5
   angle: 75
-  Debug_LineOfSight: 0
+  Debug_LineOfSight: 1
   rangeColor: {r: 0.8584906, g: 0.28092963, b: 0, a: 1}
   angleColor: {r: 1, g: 1, b: 1, a: 1}
   positionDiference: {x: 0, y: 0, z: 0}
@@ -584,7 +584,7 @@ Animator:
   m_GameObject: {fileID: 1331538947874972191}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7b437584aaed16f45a877b0862797cb3, type: 3}
-  m_Controller: {fileID: 9100000, guid: b766f27f56424064094210d16bba8d5b, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

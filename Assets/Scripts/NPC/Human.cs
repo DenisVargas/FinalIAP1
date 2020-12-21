@@ -6,6 +6,14 @@ using System;
 
 public class Human : NPC
 {
+    [Header("Sonido")]
+    [SerializeField] private AudioSource ManagerSounds;
+    [SerializeField] private AudioClip PistolShootS;
+    [SerializeField] private AudioClip PistolShootS2;
+    [SerializeField] private AudioClip PistolShootS3;
+    [SerializeField] private AudioClip RifleShootS;
+    [SerializeField] private AudioClip SurvivourHurtS1;
+    [SerializeField] private AudioClip SurvivourHurtS2;
     IDamageable<Damage, HitResult> currentTarget = null;
 
     public CommonState debug_currentState;
@@ -73,6 +81,7 @@ public class Human : NPC
         Debug.Log($"{gameObject.name} ha recibido daño.");
 
         health = (health - inputDamage.damageAmmount);
+        SurvivourHurtSound1();
         if (health < 0)
             health = 0;
 
@@ -98,5 +107,43 @@ public class Human : NPC
             //Busco un nuevo target, porque el actual ha morido!
             _states.Feed(CommonState.idle);
         }
+    }
+
+    void PistolShootSound()
+    {
+
+        ManagerSounds.PlayOneShot(PistolShootS);
+    }
+
+    void PistolShootSound2()
+    {
+        ManagerSounds.PlayOneShot(PistolShootS2);
+
+    }
+
+    void PistolShootSound3()
+    {
+        ManagerSounds.PlayOneShot(PistolShootS3);
+
+    }
+
+
+
+    void RifleShootSound()
+    {
+        ManagerSounds.PlayOneShot(RifleShootS);
+    }
+
+
+    void SurvivourHurtSound1()
+    {
+        ManagerSounds.PlayOneShot(SurvivourHurtS1);
+
+    }
+
+    void SurvivourHurtSound2()
+    {
+        ManagerSounds.PlayOneShot(SurvivourHurtS2);
+
     }
 }
