@@ -6,6 +6,8 @@ using System;
 
 public class AttackState : State
 {
+    [SerializeField] private AudioSource ManagerSounds;
+    [SerializeField] private AudioClip AttackSoundS;
     public event Action OnAttackEnded = delegate { };
     public Action<CommonState> swithStateTo = delegate { };
     public event Action<HitResult> OnApplyDamage = delegate { };
@@ -50,6 +52,7 @@ public class AttackState : State
         var target = getCurrentTarget();
         if (target != null && target.IsAlive)
             OnApplyDamage(target.getHit(damage));
+        AttackSound();
     }
 
     public void OnRecovery()
@@ -66,4 +69,10 @@ public class AttackState : State
         if (target != null && !target.IsAlive)
             swithStateTo(CommonState.idle);
     }
+
+    void AttackSound()
+    {
+        ManagerSounds.PlayOneShot(AttackSoundS);
+    }
+
 }

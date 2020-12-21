@@ -435,6 +435,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 413232673637021099}
   stateType: 3
+  ManagerSounds: {fileID: 3538053602692464805}
+  RifleShootS: {fileID: 8300000, guid: 042ffd74e897c0348a64231d680bd31d, type: 3}
   attackRange: 4
   damage:
     damageAmmount: 2

@@ -313,6 +313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 1611460291}
   stateType: 3
+  ManagerSounds: {fileID: 6041852195303712750}
+  AttackSoundS: {fileID: 8300000, guid: d60bd384b69963242a8fe001f0220d20, type: 3}
   attackRange: 1.5
   damage:
     damageAmmount: 0

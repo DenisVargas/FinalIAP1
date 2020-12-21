@@ -259,6 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 5206841603003617424}
   stateType: 3
+  ManagerSounds: {fileID: 7192408619724161242}
+  RifleShootS: {fileID: 8300000, guid: d60bd384b69963242a8fe001f0220d20, type: 3}
   attackRange: 1.5
   damage:
     damageAmmount: 20
