@@ -10,25 +10,25 @@ public class AnimEventReciever : MonoBehaviour
 
     void AE_StartUp()
     {
-        Debug.Log("AttackState::AnimationEvent::Startup");
+        //Debug.Log("AttackState::AnimationEvent::Startup");
         AttackStart.Invoke();
     }
 
     void AE_ActiveStart()
     {
-        Debug.Log("AnimEventReciever::AnimationEvent::Active");
+        //Debug.Log("AnimEventReciever::AnimationEvent::Active");
         AttackActive.Invoke();
     }
 
     void AE_Recovery()
     {
-        Debug.Log("AnimEventReciever::AnimationEvent::Recovery");
+        //Debug.Log("AnimEventReciever::AnimationEvent::Recovery");
         AttackRecovery.Invoke();
     }
 
     void AE_AttackEnd()
     {
-        Debug.Log("AnimEventReciever::START");
+        //Debug.Log("AnimEventReciever::START");
         AttackEnd.Invoke();
     }
 }

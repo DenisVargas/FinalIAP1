@@ -58,7 +58,7 @@ public class PathFindSolver : MonoBehaviour
         //var nodesObj = Physics.OverlapSphere(transform.position, _lookUpRange, _pathFindingNodeMask);
         var builder = FindObjectOfType<NodeGraphBuilder>();
         var posibleNodes = builder.GetComponentsInChildren<Node>()
-                                  .OrderBy(n => Vector3.Distance(transform.position, n.transform.position));
+                                  .OrderBy(n => Vector3.Distance(position, n.transform.position));
 
         Node closerNode = posibleNodes.First();
         if (closerNode)

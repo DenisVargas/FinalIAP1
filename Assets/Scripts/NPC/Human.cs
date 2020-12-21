@@ -10,6 +10,8 @@ public class Human : NPC
 
     public CommonState debug_currentState;
 
+    public bool debug_this = false;
+
     private void Awake()
     {
         if (healthDisplay)
@@ -48,6 +50,7 @@ public class Human : NPC
         dead.AttachTo(_states);
 
         idle.AddTransition(dead)
+            .AddTransition(attack)
             .AddTransition(pursue);
 
         pursue.AddTransition(attack)
@@ -70,6 +73,12 @@ public class Human : NPC
     {
         HitResult result = new HitResult();
 
+        if (health <= 0)
+        {
+            result.killed = true;
+            return result;
+        }
+
         Debug.Log($"{gameObject.name} ha recibido daño.");
 
         health = (health - inputDamage.damageAmmount);
@@ -81,6 +90,9 @@ public class Human : NPC
 
         if (health <= 0)
         {
+            if (debug_this)
+                print("Debugging");
+
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
             healthDisplay.FadeOut();

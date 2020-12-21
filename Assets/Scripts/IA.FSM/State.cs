@@ -26,7 +26,8 @@ namespace IA.FSM
         public IState<CommonState> AddTransition(IState<CommonState> targetState)
         {
             Transition transition = new Transition(targetState, (stateType) => { });
-            transitions.Add(targetState.getStateType, transition);
+            if (!transitions.ContainsKey(targetState.getStateType))
+                transitions.Add(targetState.getStateType, transition);
             return this;
         }
         public IState<CommonState> AddTransition(IState<CommonState> targetState, Action<CommonState> OnTransition)

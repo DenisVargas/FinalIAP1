@@ -10,7 +10,7 @@ public class DeadState : State
     public override void Begin()
     {
         int deadAnim = Random.Range(0, 2);
-        print("Entre a muerte");
+        //print("Entre a muerte");
 
         if (multipleDeads)
             switch (deadAnim)

@@ -18,7 +18,7 @@ public class FollowLeaderState : State
 
     [Header("Group")]
     [SerializeField] Transform _leader = null;
-    [SerializeField] Transform[] Allies = new Transform[0];
+    public Transform[] Allies = new Transform[0];
 
     [Header("General Settings")]
     [SerializeField] float _moveSpeed = 5f;
@@ -185,8 +185,13 @@ public class FollowLeaderState : State
         style.normal.textColor = textColor;
         Handles.Label(labelPosition, labelContent, style);
     }
-#endif 
+#endif
     #endregion
+
+    public void SetFollowUpLeader(Transform leader)
+    {
+        _leader = leader;
+    }
 
     public override void Execute()
     {
@@ -222,9 +227,12 @@ public class FollowLeaderState : State
 
         if (EndResult.magnitude > 0.1f)
         {
+            _anims.Play("Move");
             transform.forward = Vector3.Slerp(transform.forward, EndResult.normalized.YComponent(0), 0.5f);
             transform.position += (EndResult * _moveSpeed * Time.deltaTime);
         }
+        else
+            _anims.Play("Idle");
 
         //La rotación depende del alligment solamente.
         //Buscar una forma de hacer que se detenga.

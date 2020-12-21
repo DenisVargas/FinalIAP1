@@ -17,9 +17,9 @@ TagManager:
   - 
   - PathFind/Graph
   - PathFind/Obstacle
-  - 
-  - 
-  - 
+  - Terrain
+  - Humans
+  - Zombies
   - 
   - 
   - 

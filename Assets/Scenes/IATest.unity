@@ -585,6 +585,11 @@ PrefabInstance:
       propertyPath: Debug_LineOfSight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8788282513823924277, guid: 12099f54c798116408f119badc75070f,
+        type: 3}
+      propertyPath: debug_this
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8788282513861857589, guid: 12099f54c798116408f119badc75070f,
         type: 3}
       propertyPath: damage.damageAmmount

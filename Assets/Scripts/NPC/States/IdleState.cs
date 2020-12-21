@@ -17,7 +17,7 @@ public class IdleState : State
 
     public override void Begin()
     {
-        UConsole.print("Im in idle");
+        //UConsole.print("Im in idle");
         _anims.Play("Idle");
     }
 

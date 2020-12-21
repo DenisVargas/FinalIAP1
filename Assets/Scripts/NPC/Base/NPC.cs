@@ -8,7 +8,8 @@ public class NPC : MonoBehaviour, IDamageable<Damage, HitResult>, IAgressor<Dama
 {
     public Action<NPC> OnDie = delegate { };
 
-    [SerializeField] protected int health = 100;
+    //[SerializeField]
+    protected int health = 100;
     [SerializeField] protected int maxhealth = 100;
     [SerializeField] protected float AttackRange = 1.5f;
     [SerializeField] protected LineOfSightComponent sight = null;

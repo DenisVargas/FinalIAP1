@@ -43,22 +43,22 @@ public class AttackState : State
         var target = getCurrentTarget();
         Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
         transform.forward = dirToTarget;
-        Debug.Log("AttackState::START");
+        //Debug.Log("AttackState::START");
     }
     public override void End()
     {
         _anims.Play("Idle");
-        Debug.Log("AttackState::END");
+        //Debug.Log("AttackState::END");
     }
 
     public void OnStartUp()
     {
-        Debug.Log("AttackState::AnimationEvent::Startup");
+        //Debug.Log("AttackState::AnimationEvent::Startup");
     }
 
     public void OnActiveStart()
     {
-        Debug.Log("AttackState::AnimationEvent::Active");
+        //Debug.Log("AttackState::AnimationEvent::Active");
         var target = getCurrentTarget();
         if (target != null && target.IsAlive)
             OnApplyDamage(target.getHit(damage));
@@ -66,14 +66,14 @@ public class AttackState : State
 
     public void OnRecovery()
     {
-        Debug.Log("AttackState::AnimationEvent::Recovery");
+        //Debug.Log("AttackState::AnimationEvent::Recovery");
     }
 
     public void OnAttackEnd()
     {
         var target = getCurrentTarget();
         OnAttackEnded();
-        Debug.Log("AttackState::AnimationEvent::EndoFAnimation");
+        //Debug.Log("AttackState::AnimationEvent::EndoFAnimation");
 
         if (target == null)
             swithStateTo(CommonState.idle);

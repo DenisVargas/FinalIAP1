@@ -10,9 +10,9 @@ public class Zombie : NPC
     [SerializeField] IDamageable<Damage, HitResult> currentTarget = null;
     [SerializeField] Node _initialTarget;
     [Tooltip("Marca a esta unidad como lider de un grupo")]
-    [SerializeField] bool LiderUnit = false;
+    public bool isCaptain = false;
     [Tooltip("Permite que la unidad se maneje de manera autónoma.")]
-    [SerializeField] bool _disband = false;
+    [SerializeField] bool _isIndependant = false;
 
     [SerializeField] CommonState Debug_CurrentState;
 
@@ -22,6 +22,8 @@ public class Zombie : NPC
             anims = GetComponent<Animator>();
         if (!solver)
             solver = GetComponent<PathFindSolver>();
+
+        health = maxhealth;
 
         //State Machine
         _states = new FiniteStateMachine<CommonState>();
@@ -38,6 +40,14 @@ public class Zombie : NPC
         Func<IDamageable<Damage, HitResult>> getTarget = () =>
         {
             return currentTarget;
+        };
+        Action ReferenceTargetReached = () =>
+        {
+            //Si somos líderes...
+            //Cuando nos movemos a un punto de referencia y llegamos a dicho punto
+            //Entonces...
+
+            _states.Feed(CommonState.idle);
         };
 
         var idle = GetComponent<IdleState>();
@@ -64,10 +74,13 @@ public class Zombie : NPC
         //Move
         MoveToState move = GetComponent<MoveToState>();
         move.lookForTargets = lookForHumans;
-        move.SetAnimator(anims)
-          .AttachTo(_states);
+        move.OnReachedTarget = ReferenceTargetReached;
+        move.getEndTargetPoint = () => { return _initialTarget; };
+        move.AttachTo(_states);
 
-        var dead = GetComponent<DeadState>().SetAnimator(anims).AttachTo(_states);
+        var dead = GetComponent<DeadState>()
+                   .SetAnimator(anims)
+                   .AttachTo(_states);
 
         #region Transitions
         idle.AddTransition(move, (cs) => { print("Transitioning!"); })
@@ -75,6 +88,9 @@ public class Zombie : NPC
             .AddTransition(attack)
             .AddTransition(pursue)
             .AddTransition(dead, (cs) => { print("Transitioning to Dead from Idle"); });
+
+        followLeader.AddTransition(move)
+                    .AddTransition(pursue);
 
         pursue.AddTransition(attack)
               .AddTransition(dead)
@@ -84,23 +100,24 @@ public class Zombie : NPC
               .AddTransition(dead);
 
         move.AddTransition(idle, (cs) => { print("Transitioning!"); })
-          .AddTransition(attack)
-          .AddTransition(followLeader)
-          .AddTransition(dead, (cs) => { });
+            .AddTransition(attack)
+            .AddTransition(pursue)
+            .AddTransition(followLeader)
+            .AddTransition(dead, (cs) => { });
 
         dead.AddTransition(dead, (cs) => { print("Transitioning"); })
             .AddTransition(idle, (cs) => { });
         #endregion
 
-        if (_disband)
-            _states.SetState(CommonState.idle);
-        //if (_states.getCurrentStateType() != CommonState.followLeader && !LiderUnit)
-        //    _states.Feed(CommonState.followLeader);
+        if (isCaptain)
+            _states.Feed(CommonState.moveTo);
+        else if (!isCaptain && !_isIndependant)
+            _states.Feed(CommonState.followLeader);
     }
 
     private void Update()
     {
-        if (LiderUnit)
+        if (isCaptain)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -156,5 +173,31 @@ public class Zombie : NPC
             //Busco un nuevo target, porque el actual ha morido!
             currentTarget = null;
         }
+    }
+
+    public void SetLookUpTargetLocation(Vector3 lookUpPosition)
+    {
+        _initialTarget = solver.getCloserNode(lookUpPosition);
+        if (_initialTarget != null && isCaptain)
+            _states.Feed(CommonState.moveTo);
+    }
+
+    public void SetGroup(List<Transform> Allies)
+    {
+        var followLeaderStates = GetComponent<FollowLeaderState>();
+        if (followLeaderStates != null)
+            followLeaderStates.Allies = Allies.ToArray();
+    }
+
+    public void SetLeader(Transform leader)
+    {
+        var FollowLeaderState = GetComponent<FollowLeaderState>();
+        if (FollowLeaderState != null)
+            FollowLeaderState.SetFollowUpLeader(leader);
+    }
+
+    public void FeedState(CommonState state)
+    {
+        _states.Feed(state);
     }
 }
