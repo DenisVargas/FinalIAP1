@@ -27,6 +27,8 @@ public interface IAgressor<input, output>
 
 public struct Damage
 {
+    [HideInInspector]
+    public GameObject source;
     public int damageAmmount;
 }
 
