@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 22.72, y: 2.44}
+  m_AnchoredPosition: {x: 22.71997, y: 2.4400024}
   m_SizeDelta: {x: 200, y: 112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2012240174569268189
@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foregroundImage: {fileID: 2012240176455064798}
+  frontImage: {fileID: 2012240175252567646}
+  FadeTime: 2
   canvas: {fileID: 2012240174569268189}
 --- !u!1 &2012240175252567644
 GameObject:

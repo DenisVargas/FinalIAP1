@@ -83,9 +83,19 @@ public class Human : NPC
         {
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
-
+            healthDisplay.FadeOut();
             OnDie(this);
             _states.Feed(CommonState.dead);
+        }
+
+        if (currentTarget == null)
+        {
+            var newTarget = inputDamage.source.GetComponent<IDamageable<Damage, HitResult>>();
+            if (newTarget != null)
+            {
+                currentTarget = newTarget;
+                _states.Feed(CommonState.attack);
+            }
         }
 
         return result;
@@ -96,6 +106,7 @@ public class Human : NPC
         if (hitResult.killed)
         {
             //Busco un nuevo target, porque el actual ha morido!
+            currentTarget = null;
             _states.Feed(CommonState.idle);
         }
     }

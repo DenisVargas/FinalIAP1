@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using IA.FSM;
+using System.Collections;
 
 public class DeadState : State
 {
@@ -30,5 +31,13 @@ public class DeadState : State
 
         foreach (var item in collisions)
             item.enabled = false;
+
+        StartCoroutine(delayedDestroy());
+    }
+
+    IEnumerator delayedDestroy()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 }

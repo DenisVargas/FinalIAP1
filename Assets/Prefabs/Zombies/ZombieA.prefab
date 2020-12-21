@@ -149,7 +149,6 @@ MonoBehaviour:
   _floqRadius: 1
   _separationWeight: 3
   _cohetionWeight: 1
-  _avoidanceWeight: 3
   obstaclesAgents:
     serializedVersion: 2
     m_Bits: 512
@@ -257,6 +256,8 @@ MonoBehaviour:
   attackRange: 1.5
   damage:
     damageAmmount: 20
+  Animations:
+  - Attack
   drawAttackRange: 0
 --- !u!114 &910750935292101468
 MonoBehaviour:
@@ -272,7 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 5206841603003617424}
   stateType: 1
-  collisions: []
+  collisions:
+  - {fileID: 5849457248727492284}
   multipleDeads: 1
 --- !u!1 &3170918103239598488
 GameObject:

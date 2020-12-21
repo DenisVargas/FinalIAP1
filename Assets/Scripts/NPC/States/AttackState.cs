@@ -28,6 +28,8 @@ public class AttackState : State
 
     public override void Begin()
     {
+        damage.source = gameObject;
+
         if (Animations.Length == 0)
             Debug.LogWarning("El estado Attack no tiene definidas las animaciones.");
         if (Animations.Length == 1)
@@ -72,6 +74,9 @@ public class AttackState : State
         var target = getCurrentTarget();
         OnAttackEnded();
         Debug.Log("AttackState::AnimationEvent::EndoFAnimation");
+
+        if (target == null)
+            swithStateTo(CommonState.idle);
 
         if (target != null && !target.IsAlive)
             swithStateTo(CommonState.idle);

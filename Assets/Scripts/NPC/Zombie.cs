@@ -130,9 +130,19 @@ public class Zombie : NPC
         {
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
-
+            healthDisplay.FadeOut();
             OnDie(this);
             _states.Feed(CommonState.dead);
+        }
+
+        if (currentTarget == null)
+        {
+            var newTarget = inputDamage.source.GetComponent<IDamageable<Damage, HitResult>>();
+            if (newTarget != null)
+            {
+                currentTarget = newTarget;
+                _states.Feed(CommonState.attack);
+            }
         }
 
         return result;
@@ -141,5 +151,10 @@ public class Zombie : NPC
     {
         base.onHit(hitResult);
         print("TE cogi puto");
+        if (hitResult.killed)
+        {
+            //Busco un nuevo target, porque el actual ha morido!
+            currentTarget = null;
+        }
     }
 }
