@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
 --- !u!1 &323089594876668596
-=======
---- !u!1 &2760661644322723391
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,31 +8,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   - component: {fileID: 2135399632671992815}
   m_Layer: 0
   m_Name: mixamorig:Spine2
-=======
-  - component: {fileID: 1848664160509343606}
-  m_Layer: 0
-  m_Name: GunHolder
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
 --- !u!4 &2135399632671992815
-=======
---- !u!4 &1848664160509343606
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 323089594876668596}
   m_LocalRotation: {x: 0.012446511, y: 0.0029730338, z: 0.0022040782, w: 0.9999157}
   m_LocalPosition: {x: -0, y: 0.12718323, z: -6.252239e-10}
@@ -291,18 +276,6 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916111371054503623
-=======
-  m_GameObject: {fileID: 2760661644322723391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 0.16, z: 0.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2169104740963972149}
-  m_Father: {fileID: 2133018718785458119}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7649327529784357947
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,7 +283,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   - component: {fileID: 9069271604374324585}
   - component: {fileID: 8788282513823924277}
   - component: {fileID: 8788282513823924276}
@@ -319,15 +291,6 @@ GameObject:
   - component: {fileID: 4347560688295761661}
   - component: {fileID: 8788282513861857589}
   - component: {fileID: 8788282513861857590}
-=======
-  - component: {fileID: 2328715839777302736}
-  - component: {fileID: 7089345607564232174}
-  - component: {fileID: 4293770308125346495}
-  - component: {fileID: 5096988694175669514}
-  - component: {fileID: 9052404687937653228}
-  - component: {fileID: 2218453324083772257}
-  - component: {fileID: 5728461604079244648}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_Layer: 0
   m_Name: Hunk
   m_TagString: Human
@@ -335,17 +298,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
 --- !u!4 &9069271604374324585
-=======
---- !u!4 &2328715839777302736
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 916111371054503623}
   m_LocalRotation: {x: -0, y: 0.97295094, z: -0, w: 0.23101224}
   m_LocalPosition: {x: 2.537, y: 0, z: 3.851}
@@ -410,34 +368,17 @@ MonoBehaviour:
   angleToTarget: 0
   distanceToTarget: 0
 --- !u!114 &8788282513823924274
-=======
-  m_GameObject: {fileID: 7649327529784357947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 842056094546757796}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7089345607564232174
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 916111371054503623}
-=======
-  m_GameObject: {fileID: 7649327529784357947}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59303af4c07ea5428e66474aff299e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 07cb81bd9283d1f46ab0c14b5a85966e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   _pathFindingNodeMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -448,27 +389,17 @@ MonoBehaviour:
   DebugDetectionRange: 0
   Debug_DetectionRangeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &8788282513861857591
-=======
-  _anims: {fileID: 2218453324083772257}
-  stateType: 1
---- !u!114 &4293770308125346495
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 916111371054503623}
-=======
-  m_GameObject: {fileID: 7649327529784357947}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73550b1b66d6ae4d9f62080e47c0438, type: 3}
+  m_Script: {fileID: 11500000, guid: 617c97995025b4840afc1c7010870217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   _anims: {fileID: 413232673637021099}
   stateType: 2
   debugThis: 0
@@ -491,27 +422,17 @@ MonoBehaviour:
   solver: {fileID: 8788282513823924274}
   debug_this: 0
 --- !u!114 &8788282513861857589
-=======
-  _anims: {fileID: 2218453324083772257}
-  stateType: 2
---- !u!114 &5096988694175669514
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 916111371054503623}
-=======
-  m_GameObject: {fileID: 7649327529784357947}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7abde911ab66574cb613704bf033a0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 68a96ba97d4ba3e4ba5483118a2eb94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   _anims: {fileID: 413232673637021099}
   stateType: 3
   ManagerSounds: {fileID: 3538053602692464805}
@@ -521,29 +442,17 @@ MonoBehaviour:
     damageAmmount: 2
   drawAttackRange: 0
 --- !u!114 &8788282513861857590
-=======
-  _anims: {fileID: 2218453324083772257}
-  stateType: 3
-  attackRange: 1.5
-  damage: 5
---- !u!114 &9052404687937653228
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 916111371054503623}
-=======
-  m_GameObject: {fileID: 7649327529784357947}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e794691249b9a284485574d012359c65, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b0e84d60eec6644cadcf9a04d7c4b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   _anims: {fileID: 413232673637021099}
   stateType: 1
   collisions:
@@ -551,28 +460,10 @@ MonoBehaviour:
   multipleDeads: 1
 --- !u!1 &1003274905042279096
 GameObject:
-=======
-  visibles:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  range: 4
-  angle: 65
-  Debug_LineOfSight: 1
-  rangeColor: {r: 1, g: 0, b: 0, a: 1}
-  angleColor: {r: 0.03391552, g: 0, b: 1, a: 1}
-  positionDiference: {x: 0, y: 0, z: 0}
-  dirToTarget: {x: 0, y: 0, z: 0}
-  angleToTarget: 0
-  distanceToTarget: 0
---- !u!95 &2218453324083772257
-Animator:
-  serializedVersion: 3
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6057383446685800031}
@@ -585,27 +476,10 @@ Animator:
   m_IsActive: 1
 --- !u!4 &6057383446685800031
 Transform:
-=======
-  m_GameObject: {fileID: 7649327529784357947}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: edb0319fe096ea042a1e03d8fb067d21, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5728461604079244648
-MonoBehaviour:
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 1003274905042279096}
   m_LocalRotation: {x: 0.12188155, y: -0.3393879, z: -0.4449362, w: 0.8197515}
   m_LocalPosition: {x: 0.029633105, y: 0.03621777, z: 0.014994043}
@@ -3046,95 +2920,11 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2137231335720683639
-=======
-  m_GameObject: {fileID: 7649327529784357947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9905ae5e6a2a53344866c033e05c641a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  AttackRange: 1.5
-  sight: {fileID: 9052404687937653228}
-  anims: {fileID: 2218453324083772257}
---- !u!1001 &1013654048645078334
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1848664160509343606}
-    m_Modifications:
-    - target: {fileID: 1156032815077632266, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_Name
-      value: Pistol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.013
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5068824
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.60135007
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.42043445
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.45241928
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -74.645004
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 153.56001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -59.947002
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1156032815077632260, guid: 20418063063b31e459e523ba14cbd0f0, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 20418063063b31e459e523ba14cbd0f0, type: 3}
---- !u!4 &2169104740963972149 stripped
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1156032815077632267, guid: 20418063063b31e459e523ba14cbd0f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1013654048645078334}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
   m_GameObject: {fileID: 9182594570896192938}
   m_LocalRotation: {x: -0.12296987, y: 0.08681861, z: -0.021391112, w: 0.9883741}
   m_LocalPosition: {x: 0.0000000010112309, y: 0.40326887, z: -4.202462e-10}
@@ -3176,14 +2966,10 @@ Transform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5075584076690610548
-=======
---- !u!1001 &5680483068019745726
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
     m_TransformParent: {fileID: 7038823038823991162}
     m_Modifications:
     - target: {fileID: 100000, guid: 76397e2adee920745b558328ae0e0902, type: 3}
@@ -3227,71 +3013,9 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 76397e2adee920745b558328ae0e0902, type: 3}
-=======
-    m_TransformParent: {fileID: 2328715839777302736}
-    m_Modifications:
-    - target: {fileID: -8221609900653767914, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1485c5aa3e8d0484c85c624595a2b803, type: 2}
-    - target: {fileID: -6165827872063535620, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2faa741ff86a57d49a7928e4bf32e68c, type: 2}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Humans/Hunk.prefab
     - target: {fileID: 400000, guid: 76397e2adee920745b558328ae0e0902, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
@@ -3319,49 +3043,4 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 76397e2adee920745b558328ae0e0902,
     type: 3}
   m_PrefabInstance: {fileID: 5075584076690610548}
-=======
-    - target: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -2039348181509844026, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5b84736da0847374987ef35e088ac213, type: 2}
-    - target: {fileID: -1316743014691780232, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1485c5aa3e8d0484c85c624595a2b803, type: 2}
-    - target: {fileID: -927199367670048503, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Name
-      value: Pistol Idle_Douglas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1651062367082650294, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1485c5aa3e8d0484c85c624595a2b803, type: 2}
-    - target: {fileID: 4054321849461254258, guid: 51a9efc873ecd654faf9869d8151835d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bc0513e4071f6f74caee417a9f615fe4, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 51a9efc873ecd654faf9869d8151835d, type: 3}
---- !u!4 &842056094546757796 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 51a9efc873ecd654faf9869d8151835d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5680483068019745726}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2133018718785458119 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3220319501169496967, guid: 51a9efc873ecd654faf9869d8151835d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5680483068019745726}
->>>>>>> parent of 4bc7e22... Merge branch 'main' into Markitos:Assets/Prefabs/Humans/Douglas.prefab
   m_PrefabAsset: {fileID: 0}

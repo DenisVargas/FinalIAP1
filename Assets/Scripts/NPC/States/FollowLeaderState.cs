@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using IA.FSM;
@@ -10,6 +11,8 @@ using UnityEditor;
 
 public class FollowLeaderState : State
 {
+    public Action LookForTargets = delegate { };
+
     [Header("Components")]
     [SerializeField] LineOfSightComponent _sight = null;
 
@@ -46,54 +49,6 @@ public class FollowLeaderState : State
     /// </summary>
     Vector3 avoidance = Vector3.zero;
     Vector3 EndResult = Vector3.zero;
-
-    public override void Begin()
-    {
-        
-    }
-    public override void Execute()
-    {
-        print("FollowLeaderState: Execute"); 
-        if (StayQuiet)
-            return;
-
-#if UNITY_EDITOR
-        if (debugthisSHIT)
-            print("this"); 
-#endif
-
-        Vector3 vecToLeader = (_leader.transform.position - transform.position);
-        Vector3 dirToLeader = vecToLeader.normalized;
-        float distToLeader = Vector3.Distance(transform.position, _leader.transform.position);
-
-        Alligment = transform.getAlignment(Allies);
-        cohesion = transform.getCohesion(Allies, _cohetionWeight).YComponent(0);
-        separation = transform.getSeparation(Allies, _separationWeight).YComponent(0);
-
-        obstacles = _sight.GetAllVisibles(transform.position, _maximunAvoidanceRadius, _avoidanceAngle, obstaclesAgents);
-        avoidance = transform.getAvoidance(obstacles, (position) => AvoidanceWeightModifier.Evaluate(position), _maximunAvoidanceRadius, _minimunAvoidanceRadius).YComponent(0);
-
-        //EndResult = dirToLeader + separation + cohesion + avoidance;
-        EndResult = separation + cohesion + avoidance;
-
-        if (EndResult.magnitude > 0.1f)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, EndResult.normalized.YComponent(0), 0.5f);
-            transform.position += (EndResult * _moveSpeed * Time.deltaTime);
-        }
-
-        //La rotación depende del alligment solamente.
-        //Buscar una forma de hacer que se detenga.
-        //if (distToLeader < 2)
-        //{
-        //    //transform.forward = ((EndResult + Alligment).normalized).YComponent(0); //El componente forward debería ser algo que se actualiza en el tiempo.
-        //    transform.forward = Vector3.Slerp(transform.forward, ((EndResult + Alligment).normalized).YComponent(0), 0.5f); //El componente forward debería ser algo que se actualiza en el tiempo.
-        //}
-    }
-    public override void End()
-    {
-        base.End();
-    }
 
     #region DEBUG
 #if UNITY_EDITOR
@@ -232,4 +187,51 @@ public class FollowLeaderState : State
     }
 #endif 
     #endregion
+
+    public override void Execute()
+    {
+        LookForTargets();
+
+        if (StayQuiet)
+            return;
+
+        if (_leader == null)
+        {
+            Debug.LogWarning($"{gameObject.name}::FollowLeaderState:: La variable lider, no ha sido asignada.");
+            return;
+        }
+
+#if UNITY_EDITOR
+        if (debugthisSHIT)
+            print("FollowLeaderState: Execute");
+#endif
+
+        Vector3 vecToLeader = (_leader.transform.position - transform.position);
+        Vector3 dirToLeader = vecToLeader.normalized;
+        float distToLeader = Vector3.Distance(transform.position, _leader.transform.position);
+
+        Alligment = transform.getAlignment(Allies);
+        cohesion = transform.getCohesion(Allies, _cohetionWeight).YComponent(0);
+        separation = transform.getSeparation(Allies, _separationWeight).YComponent(0);
+
+        obstacles = _sight.GetAllVisibles(transform.position, _maximunAvoidanceRadius, _avoidanceAngle, obstaclesAgents);
+        avoidance = transform.getAvoidance(obstacles, (position) => AvoidanceWeightModifier.Evaluate(position), _maximunAvoidanceRadius, _minimunAvoidanceRadius).YComponent(0);
+
+        //EndResult = dirToLeader + separation + cohesion + avoidance;
+        EndResult = separation + cohesion + avoidance;
+
+        if (EndResult.magnitude > 0.1f)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, EndResult.normalized.YComponent(0), 0.5f);
+            transform.position += (EndResult * _moveSpeed * Time.deltaTime);
+        }
+
+        //La rotación depende del alligment solamente.
+        //Buscar una forma de hacer que se detenga.
+        //if (distToLeader < 2)
+        //{
+        //    //transform.forward = ((EndResult + Alligment).normalized).YComponent(0); //El componente forward debería ser algo que se actualiza en el tiempo.
+        //    transform.forward = Vector3.Slerp(transform.forward, ((EndResult + Alligment).normalized).YComponent(0), 0.5f); //El componente forward debería ser algo que se actualiza en el tiempo.
+        //}
+    }
 }

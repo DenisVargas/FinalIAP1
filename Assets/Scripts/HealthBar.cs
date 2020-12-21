@@ -1,48 +1,26 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField]
-    private Image foregroundImage;
-    [SerializeField]
-    private float updateSpeedSeconds = 0.5f;
+    [SerializeField] Image foregroundImage = null;
+    [SerializeField] Canvas canvas = null;
+
+    public float value
+    {
+        get => foregroundImage.fillAmount;
+        set =>  foregroundImage.fillAmount = value;
+    }
 
     private void Awake()
     {
-        GetComponentInParent<Health>().OnHealthPcChanged += HandleHealthChanged;
-
-
+        canvas.worldCamera = Camera.main;
+        foregroundImage.fillAmount = 1f;
     }
 
-
-    private void HandleHealthChanged (float pct)
-    {
-        StartCoroutine(ChangeToPct(pct));
-    }
-
-    private IEnumerator ChangeToPct(float pct)
-    {
-        float preChangePct = foregroundImage.fillAmount;
-        float elapsed = 0f;
-
-            while (elapsed < updateSpeedSeconds)
-        {
-            elapsed += Time.deltaTime;
-            foregroundImage.fillAmount = Mathf.Lerp(preChangePct, pct, elapsed / updateSpeedSeconds);
-            yield return null;
-        }
-
-        foregroundImage.fillAmount = pct;
-    }
-    private void lateupdate()
+    private void Update()
     {
         transform.LookAt(Camera.main.transform);
-        transform.Rotate(0, 180, 0);
+        //transform.Rotate(0, 180, 0);
     }
-
-
-
 }
