@@ -81,7 +81,7 @@ public class Human : NPC
         Debug.Log($"{gameObject.name} ha recibido daño.");
 
         health = (health - inputDamage.damageAmmount);
-        SurvivourHurtSound1();
+        SurvivourHurtSound2();
         if (health < 0)
             health = 0;
 
@@ -92,6 +92,7 @@ public class Human : NPC
         {
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
+            SurvivourHurtSound2();
 
             OnDie(this);
             _states.Feed(CommonState.dead);

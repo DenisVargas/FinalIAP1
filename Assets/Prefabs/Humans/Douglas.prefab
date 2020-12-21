@@ -372,12 +372,12 @@ MonoBehaviour:
   solver: {fileID: 8868788048560805021}
   healthDisplay: {fileID: 4784259690134948553}
   ManagerSounds: {fileID: 1864357128801421392}
-  PistolShootS: {fileID: 8300000, guid: 58d48e56a954acf41b8a4d131ea6030c, type: 3}
-  PistolShootS2: {fileID: 8300000, guid: 4bc9744fc811d8f42aa27d41a3fe6690, type: 3}
+  PistolShootS: {fileID: 0}
+  PistolShootS2: {fileID: 0}
   PistolShootS3: {fileID: 8300000, guid: f333cf410acbf6b468fb3309b1520e66, type: 3}
-  RifleShootS: {fileID: 8300000, guid: 042ffd74e897c0348a64231d680bd31d, type: 3}
+  RifleShootS: {fileID: 0}
   SurvivourHurtS1: {fileID: 8300000, guid: 1acc24cf44c4107439cf0c9976dbdc55, type: 3}
-  SurvivourHurtS2: {fileID: 8300000, guid: c4060778f6294554c9408023878d6a9c, type: 3}
+  SurvivourHurtS2: {fileID: 0}
   debug_currentState: 0
 --- !u!114 &8868788048560805019
 MonoBehaviour:
@@ -3488,6 +3488,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.11886676
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 34fd0a0dd14658d4bbeb1f4ed89205d2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a56e55821beec564698eb60e902de1ac, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34fd0a0dd14658d4bbeb1f4ed89205d2, type: 3}
 --- !u!4 &2263433930595392880 stripped

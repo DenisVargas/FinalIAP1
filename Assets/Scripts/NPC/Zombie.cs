@@ -7,6 +7,11 @@ using IA.PathFinding;
 
 public class Zombie : NPC
 {
+    [Header("Sonido")]
+    [SerializeField] private AudioSource ManagerSounds;
+    [SerializeField] private AudioClip ZombieAttackS;
+    [SerializeField] private AudioClip ZombieHurtS;
+    [SerializeField] private AudioClip ZombieDyingS;
     [SerializeField] IDamageable<Damage, HitResult> currentTarget = null;
     [SerializeField] Node _initialTarget;
     [Tooltip("Marca a esta unidad como lider de un grupo")]
@@ -60,6 +65,7 @@ public class Zombie : NPC
         attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
         attack.AttachTo(_states);
+        ZombieAttackSound();
 
         //Move
         MoveToState move = GetComponent<MoveToState>();
@@ -118,7 +124,7 @@ public class Zombie : NPC
         HitResult result = new HitResult();
 
         Debug.Log($"{gameObject.name} ha recibido daño.");
-
+        ZombieHurt();
         health = (health - inputDamage.damageAmmount);
         if (health < 0)
             health = 0;
@@ -130,6 +136,7 @@ public class Zombie : NPC
         {
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
+            ZombieDying();
 
             OnDie(this);
             _states.Feed(CommonState.dead);
@@ -141,5 +148,23 @@ public class Zombie : NPC
     {
         base.onHit(hitResult);
         print("TE cogi puto");
+    }
+
+    void ZombieAttackSound()
+    {
+
+        ManagerSounds.PlayOneShot(ZombieAttackS);
+    }
+
+    void ZombieHurt()
+    {
+        ManagerSounds.PlayOneShot(ZombieHurtS);
+
+    }
+
+    void ZombieDying()
+    {
+        ManagerSounds.PlayOneShot(ZombieDyingS);
+
     }
 }
