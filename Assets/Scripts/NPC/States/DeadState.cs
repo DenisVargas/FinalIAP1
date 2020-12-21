@@ -1,34 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using IA.FSM;
 
 public class DeadState : State
 {
-    [SerializeField] Collider[] collisions = new Collider[0];
-    [SerializeField] bool multipleDeads = false;
-
     public override void Begin()
     {
-        int deadAnim = Random.Range(0, 2);
+        int deadAnim = Random.Range(1, 3);
         print("Entre a muerte");
+        _anims.SetInteger("Dead", deadAnim); //Seteo la animacion.
+    }
 
-        if (multipleDeads)
-            switch (deadAnim)
-            {
-                case 0:
-                    _anims.Play("Dead 1"); //Seteo la animacion.
-                    break;
-
-                case 1:
-                    _anims.Play("Dead 2"); //Seteo la animacion.
-                    break;
-
-                default:
-                    break;
-            }
-        else
-            _anims.Play("Dead");
-
-        foreach (var item in collisions)
-            item.enabled = false;
+    public override void End()
+    {
+        _anims.SetInteger("Dead", 0); //Reseteo la animacion.
     }
 }

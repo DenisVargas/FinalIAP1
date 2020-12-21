@@ -38,7 +38,7 @@ public class FloqTest : MonoBehaviour
     [Header("Weights")]
     [SerializeField] float SeparationWeight = 1f;
     [SerializeField] float cohetionWeight = 1f;
-    //[SerializeField] float avoidanceWeight = 1f;
+    [SerializeField] float avoidanceWeight = 1f;
 
     [Header("============= Debug =============")]
     [SerializeField] List<Transform> debugAllies = new List<Transform>();

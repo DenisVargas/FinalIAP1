@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foregroundImage: {fileID: 2012240176455064798}
-  canvas: {fileID: 2012240174569268189}
+  updateSpeedSeconds: 0.2
 --- !u!1 &2012240175252567644
 GameObject:
   m_ObjectHideFlags: 0

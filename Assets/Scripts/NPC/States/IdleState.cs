@@ -1,15 +1,10 @@
 ﻿using System;
 using IA.FSM;
-using UnityEngine;
 using UConsole = UnityEngine.MonoBehaviour;
 
 [Serializable]
 public class IdleState : State
 {
-    public Action CheckLineOfSight = delegate { };
-
-    [SerializeField] bool debugThis = false;
-
     public IdleState()
     {
         stateType = CommonState.idle;
@@ -18,14 +13,14 @@ public class IdleState : State
     public override void Begin()
     {
         UConsole.print("Im in idle");
-        _anims.Play("Idle");
+        _anims.SetBool("idle", true);
     }
-
     public override void Execute()
     {
-        if (debugThis)
-            print("Debugging...");
-
-        CheckLineOfSight();
+        UConsole.print("Staying in Idle");
+    }
+    public override void End()
+    {
+        UConsole.print("Im not longer in idle");
     }
 }
