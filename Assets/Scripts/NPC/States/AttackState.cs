@@ -13,6 +13,7 @@ public class AttackState : State
 
     [SerializeField] float attackRange = 1.5f;
     [SerializeField] Damage damage = new Damage();
+    [SerializeField] string[] Animations = new string[1] { "Attack" };
 
     #region DEBUGGING
     [Header("============ DEBUG ============")]
@@ -27,7 +28,16 @@ public class AttackState : State
 
     public override void Begin()
     {
-        _anims.Play("Attack");
+        if (Animations.Length == 0)
+            Debug.LogWarning("El estado Attack no tiene definidas las animaciones.");
+        if (Animations.Length == 1)
+            _anims.Play(Animations[0]);
+        else if(Animations.Length > 1)
+        {
+            int value = UnityEngine.Random.Range(0, Animations.Length);
+            _anims.Play(Animations[value]);
+        }
+
         var target = getCurrentTarget();
         Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
         transform.forward = dirToTarget;
@@ -65,5 +75,10 @@ public class AttackState : State
 
         if (target != null && !target.IsAlive)
             swithStateTo(CommonState.idle);
+        else if (Animations.Length > 1)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, 2);
+            _anims.Play(Animations[randomIndex]);
+        }
     }
 }
