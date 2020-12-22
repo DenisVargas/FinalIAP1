@@ -1,7 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+
+public enum healthState
+{
+    daijobu,
+    yameteKudasaii,
+    nigerundayooo
+}
 
 public class LevelManager : MonoBehaviour
 {
@@ -146,6 +155,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    [SerializeField] HumanSpawner humanSpawner = null;
+    public ZombieSpawner[] zombieSpawners = null;
+
     private void Awake()
     {
         if (ins == null)
@@ -157,22 +170,14 @@ public class LevelManager : MonoBehaviour
         SurvivorAmmount = _survivorAmmount;
         Waves = _waves;
         Frecuency = _frecuency;
-        ActiveSpawners = _activeSpawners;
+
+        humanSpawner = FindObjectOfType<HumanSpawner>();
+        zombieSpawners = FindObjectsOfType<ZombieSpawner>();
+        ActiveSpawners = zombieSpawners.Length;
+        ActiveSpawners_Slider.value = ActiveSpawners;
 
         Frecuency_InputField.onEndEdit.AddListener(OnFrecuencyChange);
         _cameraController.lockInput = true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnAdd_Waves(bool value)
@@ -192,6 +197,11 @@ public class LevelManager : MonoBehaviour
         Frecuency = float.Parse(value);
     }
 
+    public void RegisterHuman(Human reference)
+    {
+
+    }
+
     public void StartGame()
     {
         //Empiezo el pinche juego Weon.
@@ -199,6 +209,12 @@ public class LevelManager : MonoBehaviour
         GameplayMenu.SetActive(true);
 
         _cameraController.lockInput = false;
+
+        //Spawn De humanitos.
+        humanSpawner.Spawn(_survivorAmmount);
+
+        //Spawn de Zombies.
+        StartCoroutine(SpawnZombies());
     }
     public void Restart()
     {
@@ -236,11 +252,25 @@ public class LevelManager : MonoBehaviour
                 break;
         }
     }
-}
 
-public enum healthState
-{
-    daijobu,
-    yameteKudasaii,
-    nigerundayooo
+    IEnumerator SpawnZombies()
+    {
+        int wavesLeft = Waves;
+
+        while (wavesLeft > 0)
+        {
+            List<ZombieSpawner> aviableSpawners = new List<ZombieSpawner>(zombieSpawners);
+
+            for (int i = 0; i < ActiveSpawners; i++)
+            {
+                int randomIndex = Random.Range(0, aviableSpawners.Count);
+                int randomMaxAmmount = Random.Range(1, 4);
+                aviableSpawners[randomIndex].SpawnWithSettings(1, randomMaxAmmount);
+                aviableSpawners.RemoveAt(randomIndex);
+            }
+
+            wavesLeft--;
+            yield return new WaitForSeconds(Frecuency);
+        }
+    }
 }
