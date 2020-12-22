@@ -7,6 +7,10 @@ using IA.PathFinding;
 
 public class Zombie : NPC
 {
+    [Header("Sonido")]
+    [SerializeField] private AudioSource ManagerSound;
+    [SerializeField] private AudioClip HurtSoundS;
+    [SerializeField] private AudioClip DyingSoundS;
     [SerializeField] IDamageable<Damage, HitResult> currentTarget = null;
     [SerializeField] Node _initialTarget;
     [Tooltip("Marca a esta unidad como lider de un grupo")]
@@ -142,9 +146,11 @@ public class Zombie : NPC
 
         if (healthDisplay)
             healthDisplay.value = ((float)health) / ((float)maxhealth);
+        HurtSound();
 
         if (health <= 0)
         {
+            DyingSound();
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
             healthDisplay.FadeOut();
@@ -200,4 +206,14 @@ public class Zombie : NPC
     {
         _states.Feed(state);
     }
+
+    void HurtSound()
+    {
+        ManagerSound.PlayOneShot(HurtSoundS);
+    }
+    void DyingSound()
+    {
+        ManagerSound.PlayOneShot(DyingSoundS);
+    }
+
 }

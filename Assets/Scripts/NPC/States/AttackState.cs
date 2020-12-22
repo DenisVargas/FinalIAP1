@@ -6,6 +6,9 @@ using System;
 
 public class AttackState : State
 {
+    [Header("Sonido")]
+    [SerializeField] private AudioSource ManagerSound;
+    [SerializeField] private AudioClip AttackSoundS;
     public event Action OnAttackEnded = delegate { };
     public Action<CommonState> swithStateTo = delegate { };
     public event Action<HitResult> OnApplyDamage = delegate { };
@@ -62,6 +65,7 @@ public class AttackState : State
         var target = getCurrentTarget();
         if (target != null && target.IsAlive)
             OnApplyDamage(target.getHit(damage));
+        AttackSound();
     }
 
     public void OnRecovery()
@@ -85,5 +89,10 @@ public class AttackState : State
             int randomIndex = UnityEngine.Random.Range(0, 2);
             _anims.Play(Animations[randomIndex]);
         }
+    }
+
+     void AttackSound()
+    {
+        ManagerSound.PlayOneShot(AttackSoundS);    
     }
 }

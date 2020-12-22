@@ -4,6 +4,7 @@ using System.Collections;
 
 public class DeadState : State
 {
+    
     [SerializeField] Collider[] collisions = new Collider[0];
     [SerializeField] bool multipleDeads = false;
 
