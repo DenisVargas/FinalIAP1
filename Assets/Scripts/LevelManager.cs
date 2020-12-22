@@ -216,6 +216,25 @@ public class LevelManager : MonoBehaviour
         if (ZombiesCount <= 0)
             OnGameEnded(faction.human);
     }
+    public bool humansAlive()
+    {
+        return _survivorsLeft > 0;
+    }
+    public Vector3 GetMiddlePointBetweenHumans()
+    {
+        var humans = FindObjectsOfType<Human>();
+
+        int acum = 0;
+        Vector3 sum = Vector3.zero;
+        foreach (var human in humans)
+        {
+            sum += human.transform.position;
+            acum++;
+        }
+
+        sum /= acum;
+        return sum;
+    }
 
     public void StartGame()
     {

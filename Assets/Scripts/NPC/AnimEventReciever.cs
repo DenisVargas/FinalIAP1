@@ -7,6 +7,8 @@ public class AnimEventReciever : MonoBehaviour
     [SerializeField] UnityEvent AttackActive = new UnityEvent();
     [SerializeField] UnityEvent AttackRecovery = new UnityEvent();
     [SerializeField] UnityEvent AttackEnd = new UnityEvent();
+    [SerializeField] UnityEvent AlertStart = new UnityEvent();
+    [SerializeField] UnityEvent AlertEnd = new UnityEvent();
 
     void AE_StartUp()
     {
@@ -30,5 +32,15 @@ public class AnimEventReciever : MonoBehaviour
     {
         //Debug.Log("AnimEventReciever::START");
         AttackEnd.Invoke();
+    }
+
+    void AE_AlertStart()
+    {
+        AlertStart.Invoke();
+    }
+
+    void AE_AlertEnd()
+    {
+        AlertEnd.Invoke();
     }
 }

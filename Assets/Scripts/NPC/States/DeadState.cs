@@ -35,12 +35,14 @@ public class DeadState : State
         var zombie = GetComponent<Zombie>();
         if (zombie)
         {
-            LevelManager.ins.TrackZombie(zombie);
+            if (LevelManager.ins)
+                LevelManager.ins.TrackZombie(zombie);
         }
         else
         {
             var human = GetComponent<Human>();
-            LevelManager.ins.TrackHuman(human);
+            if (LevelManager.ins)
+                LevelManager.ins.TrackHuman(human);
         }
         
 

@@ -11,7 +11,7 @@ public class AttackState : State
     [SerializeField] private AudioClip AttackSoundS;
     public event Action OnAttackEnded = delegate { };
     public Action<CommonState> swithStateTo = delegate { };
-    public event Action<HitResult> OnApplyDamage = delegate { };
+    public Action<HitResult> OnApplyDamage = delegate { };
     public Func<IDamageable<Damage, HitResult>> getCurrentTarget = delegate{return null;};
 
     [SerializeField] float attackRange = 1.5f;
@@ -20,6 +20,7 @@ public class AttackState : State
 
     #region DEBUGGING
     [Header("============ DEBUG ============")]
+    [SerializeField] bool debugThis = false;
     [SerializeField] bool drawAttackRange = false;
     private void OnDrawGizmos()
     {
@@ -61,7 +62,9 @@ public class AttackState : State
 
     public void OnActiveStart()
     {
-        //Debug.Log("AttackState::AnimationEvent::Active");
+        if (debugThis)
+            Debug.Log("AttackState::AnimationEvent::Active");
+
         var target = getCurrentTarget();
         if (target != null && target.IsAlive)
             OnApplyDamage(target.getHit(damage));

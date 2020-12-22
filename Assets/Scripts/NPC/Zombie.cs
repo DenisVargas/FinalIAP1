@@ -11,12 +11,16 @@ public class Zombie : NPC
     [SerializeField] private AudioSource ManagerSound;
     [SerializeField] private AudioClip HurtSoundS;
     [SerializeField] private AudioClip DyingSoundS;
-    [SerializeField] IDamageable<Damage, HitResult> currentTarget = null;
-    [SerializeField] Node _initialTarget;
+
+    [Header("Group")]
     [Tooltip("Marca a esta unidad como lider de un grupo")]
     public bool isCaptain = false;
     [Tooltip("Permite que la unidad se maneje de manera autónoma.")]
     [SerializeField] bool _isIndependant = false;
+    [SerializeField] List<Zombie> Allies = new List<Zombie>();
+
+    [SerializeField] IDamageable<Damage, HitResult> currentTarget = null;
+    [SerializeField] Node _initialTarget;
 
     [SerializeField] CommonState Debug_CurrentState;
 
@@ -38,7 +42,10 @@ public class Zombie : NPC
             if (currentTarget != null)
             {
                 //Encontramos un objetivo
-                _states.Feed(CommonState.pursue);
+                if (isCaptain)
+                    _states.Feed(CommonState.alert);
+                else
+                    _states.Feed(CommonState.pursue);
             }
         };
         Func<IDamageable<Damage, HitResult>> getTarget = () =>
@@ -47,11 +54,14 @@ public class Zombie : NPC
         };
         Action ReferenceTargetReached = () =>
         {
-            //Si somos líderes...
-            //Cuando nos movemos a un punto de referencia y llegamos a dicho punto
-            //Entonces...
+            if (LevelManager.ins.humansAlive())
+            {
+                Vector3 referencePosition = LevelManager.ins.GetMiddlePointBetweenHumans();
+                _initialTarget = solver.getCloserNode(referencePosition);
 
-            _states.Feed(CommonState.idle);
+                _states.Feed(CommonState.moveTo);
+            }
+            else _states.Feed(CommonState.idle);
         };
 
         var idle = GetComponent<IdleState>();
@@ -60,8 +70,21 @@ public class Zombie : NPC
 
         //Follow Leader
         FollowLeaderState followLeader = GetComponent<FollowLeaderState>();
+        followLeader.getAlliesTransformComponent = () =>
+        {
+            List<Transform> allies = new List<Transform>();
+            foreach (var item in Allies)
+                allies.Add(item.transform);
+            return allies;
+        };
         followLeader.LookForTargets = lookForHumans;
         followLeader.AttachTo(_states);
+
+        var alert = GetComponent<AlertState>();
+        alert.SwitchStateTo = _states.Feed;
+        alert.getCurrentAttackTarget = getTarget;
+        alert.getAllies = GetAlliesList;
+        alert.AttachTo(_states);
 
         //pursue
         var pursue = GetComponent<PursueState>();
@@ -73,6 +96,7 @@ public class Zombie : NPC
         AttackState attack = GetComponent<AttackState>();
         attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
+        attack.OnApplyDamage = onHit;
         attack.AttachTo(_states);
 
         //Move
@@ -90,11 +114,16 @@ public class Zombie : NPC
         idle.AddTransition(move, (cs) => { print("Transitioning!"); })
             .AddTransition(followLeader)
             .AddTransition(attack)
+            .AddTransition(alert)
             .AddTransition(pursue)
             .AddTransition(dead, (cs) => { print("Transitioning to Dead from Idle"); });
 
         followLeader.AddTransition(move)
                     .AddTransition(pursue);
+
+        alert.AddTransition(pursue)
+             .AddTransition(idle)
+             .AddTransition(dead);
 
         pursue.AddTransition(attack)
               .AddTransition(dead)
@@ -106,6 +135,7 @@ public class Zombie : NPC
         move.AddTransition(idle, (cs) => { print("Transitioning!"); })
             .AddTransition(attack)
             .AddTransition(pursue)
+            .AddTransition(alert)
             .AddTransition(followLeader)
             .AddTransition(dead, (cs) => { });
 
@@ -117,6 +147,15 @@ public class Zombie : NPC
             _states.Feed(CommonState.moveTo);
         else if (!isCaptain && !_isIndependant)
             _states.Feed(CommonState.followLeader);
+    }
+
+    public void AlertUnit(IDamageable<Damage, HitResult> target)
+    {
+        if (currentTarget == null || !currentTarget.IsAlive)
+        {
+            currentTarget = target;
+            _states.Feed(CommonState.pursue);
+        }
     }
 
     private void Update()
@@ -138,7 +177,7 @@ public class Zombie : NPC
     {
         HitResult result = new HitResult();
 
-        Debug.Log($"{gameObject.name} ha recibido daño.");
+        //Debug.Log($"{gameObject.name} ha recibido daño.");
 
         health = (health - inputDamage.damageAmmount);
         if (health < 0)
@@ -172,12 +211,37 @@ public class Zombie : NPC
     }
     public override void onHit(HitResult hitResult)
     {
-        base.onHit(hitResult);
-        print("TE cogi puto");
         if (hitResult.killed)
         {
             //Busco un nuevo target, porque el actual ha morido!
-            currentTarget = null;
+            currentTarget = FindCloserTarget("Human", sight.range, sight.visibles);
+            if (currentTarget != null)
+            {
+                //Encontramos un objetivo
+                if (isCaptain)
+                    _states.Feed(CommonState.alert);
+                else
+                    _states.Feed(CommonState.pursue);
+            }
+            else if (LevelManager.ins && isCaptain)
+            {
+                //Si no encuentro un objetivo, paso de vuelta a moveTo, y me muevo al lugar de referencia.
+                if (LevelManager.ins.humansAlive())
+                {
+                    Vector3 referencePosition = LevelManager.ins.GetMiddlePointBetweenHumans();
+                    _initialTarget = solver.getCloserNode(referencePosition);
+
+                    Debug.LogWarning($"{gameObject.name}::Hay mas bastardiños humanos");
+                    _states.Feed(CommonState.moveTo);
+                }
+                else
+                {
+                    Debug.LogWarning($"{gameObject.name}::Todos los humanos estan muertos jeje");
+                    _states.Feed(CommonState.idle);
+                }
+            }
+            else
+                _states.Feed(CommonState.idle);
         }
     }
 
@@ -190,9 +254,13 @@ public class Zombie : NPC
 
     public void SetGroup(List<Transform> Allies)
     {
-        var followLeaderStates = GetComponent<FollowLeaderState>();
-        if (followLeaderStates != null)
-            followLeaderStates.Allies = Allies.ToArray();
+        foreach (var item in Allies)
+            this.Allies.Add(item.GetComponentInParent<Zombie>());
+    }
+
+    public List<Zombie> GetAlliesList()
+    {
+        return Allies;
     }
 
     public void SetLeader(Transform leader)

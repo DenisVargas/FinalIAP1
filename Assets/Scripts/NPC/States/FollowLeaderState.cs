@@ -12,13 +12,13 @@ using UnityEditor;
 public class FollowLeaderState : State
 {
     public Action LookForTargets = delegate { };
+    public Func<List<Transform>> getAlliesTransformComponent = delegate { return new List<Transform>(); };
 
     [Header("Components")]
     [SerializeField] LineOfSightComponent _sight = null;
 
     [Header("Group")]
     [SerializeField] Transform _leader = null;
-    public Transform[] Allies = new Transform[0];
 
     [Header("General Settings")]
     [SerializeField] float _moveSpeed = 5f;
@@ -54,8 +54,6 @@ public class FollowLeaderState : State
 #if UNITY_EDITOR
     [Header("============= Debug =============")]
     [SerializeField] bool debugthisSHIT;
-    [SerializeField] List<Transform> debugAllies = new List<Transform>();
-    [SerializeField] List<Transform> obstacles = new List<Transform>();
 
     [Header("Colors")]
     [SerializeField] Color _sightAngleColor = Color.white;
@@ -92,12 +90,12 @@ public class FollowLeaderState : State
             Gizmos.matrix = Matrix4x4.Scale(new Vector3(1, 0, 1));
             Gizmos.DrawWireSphere(transform.position, _floqRadius);
         }
-        if (ShowLeaderDirection && Allies.Length > 0)
+        if (ShowLeaderDirection)
         {
             Gizmos.color = debug_LeaderDirectionColor;
-            Gizmos.DrawLine(transform.position, Allies[0].transform.position);
+            Gizmos.DrawLine(transform.position, _leader.transform.position);
 
-            Vector3 Leader_labelPosition = getMedianPoint(transform.position, Allies[0].transform.position).YComponent(0 + 0.1f);
+            Vector3 Leader_labelPosition = getMedianPoint(transform.position, _leader.transform.position).YComponent(0 + 0.1f);
             DrawLabel(Leader_labelPosition, "Lider direction", Color.white);
         }
 
@@ -197,8 +195,10 @@ public class FollowLeaderState : State
     {
         LookForTargets();
 
+#if UNITY_EDITOR
         if (StayQuiet)
-            return;
+            return; 
+#endif
 
         if (_leader == null)
         {
@@ -215,11 +215,12 @@ public class FollowLeaderState : State
         Vector3 dirToLeader = vecToLeader.normalized;
         float distToLeader = Vector3.Distance(transform.position, _leader.transform.position);
 
-        Alligment = transform.getAlignment(Allies);
-        cohesion = transform.getCohesion(Allies, _cohetionWeight).YComponent(0);
-        separation = transform.getSeparation(Allies, _separationWeight).YComponent(0);
+        var _allies = getAlliesTransformComponent();
+        Alligment = transform.getAlignment(_allies);
+        cohesion = transform.getCohesion(_allies, _cohetionWeight).YComponent(0);
+        separation = transform.getSeparation(_allies, _separationWeight).YComponent(0);
 
-        obstacles = _sight.GetAllVisibles(transform.position, _maximunAvoidanceRadius, _avoidanceAngle, obstaclesAgents);
+        var obstacles = _sight.GetAllVisibles(transform.position, _maximunAvoidanceRadius, _avoidanceAngle, obstaclesAgents);
         avoidance = transform.getAvoidance(obstacles, (position) => AvoidanceWeightModifier.Evaluate(position), _maximunAvoidanceRadius, _minimunAvoidanceRadius).YComponent(0);
 
         //EndResult = dirToLeader + separation + cohesion + avoidance;

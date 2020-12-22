@@ -450,10 +450,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 530891711552610564}
   stateType: 5
+  _sight: {fileID: 8868788048560805019}
   pursueSpeed: 5
   attackRange: 2
-  solver: {fileID: 8868788048560805021}
+  obstaclesAgents:
+    serializedVersion: 2
+    m_Bits: 2560
+  _avoidanceAngle: 140
+  _minimunAvoidanceRadius: 1.2
+  _maximunAvoidanceRadius: 2
+  AvoidanceWeightModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.794406
+      outSlope: -2.794406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07243071
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11710125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   debug_this: 0
+  ShowAvoidance: 0
+  ShowMinAvoidanceRadius: 0
+  ShowMaxAvoidanceRadius: 0
+  debug_AvoidanceColorLabel: {r: 1, g: 0.71099186, b: 0, a: 1}
+  debug_MinimunAvoidanceDistanceColor: {r: 1, g: 0.05830755, b: 0, a: 1}
+  debug_MaximunAvoidanceDistanceColor: {r: 1, g: 0.41291898, b: 0, a: 1}
 --- !u!114 &8868788048858547610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +512,7 @@ MonoBehaviour:
     damageAmmount: 10
   Animations:
   - Attack
+  debugThis: 0
   drawAttackRange: 0
 --- !u!114 &8868788048858547609
 MonoBehaviour:
@@ -778,6 +815,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  AlertStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AlertEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1231659091097441613
 GameObject:
   m_ObjectHideFlags: 0

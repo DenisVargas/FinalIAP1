@@ -9,7 +9,6 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] GameObject[] NormalZombiePrefabs = new GameObject[3];
 
     [Header("initialSpawn")]
-    [SerializeField] Transform initialNodeReference = null;
     [SerializeField] bool spawnAtStart = false;
     [SerializeField] int minNormalZombies = 1;
     [SerializeField] int maxNormalZombies = 3;
@@ -76,7 +75,8 @@ public class ZombieSpawner : MonoBehaviour
 
         liderDePelotón.isCaptain = true;
         liderDePelotón.transform.position = transform.position;
-        liderDePelotón.SetLookUpTargetLocation(initialNodeReference.position);
+        if (LevelManager.ins && LevelManager.ins.humansAlive())
+            liderDePelotón.SetLookUpTargetLocation(LevelManager.ins.GetMiddlePointBetweenHumans());
     }
 
     private Vector3 GetrandomPositionInCircle(float minRadius, float maxRadius)

@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 2472048980727213211}
   - component: {fileID: 2472048980727213209}
   - component: {fileID: 2472048980727213202}
+  - component: {fileID: 7803306624203270315}
   m_Layer: 12
   m_Name: ZombieC
   m_TagString: Zombie
@@ -667,9 +668,10 @@ MonoBehaviour:
   ManagerSound: {fileID: 7015783154241046912}
   HurtSoundS: {fileID: 8300000, guid: 19013fae5c66f6242a417a9a90321fff, type: 3}
   DyingSoundS: {fileID: 8300000, guid: adc3a4ad9eeb5e2428a052eceac471a8, type: 3}
-  _initialTarget: {fileID: 0}
   isCaptain: 0
   _isIndependant: 0
+  Allies: []
+  _initialTarget: {fileID: 0}
   Debug_CurrentState: 0
 --- !u!114 &3442696871766045562
 MonoBehaviour:
@@ -747,7 +749,6 @@ MonoBehaviour:
   stateType: 4
   _sight: {fileID: 3442696871766045562}
   _leader: {fileID: 0}
-  Allies: []
   _moveSpeed: 3
   floquingAgentsLM:
     serializedVersion: 2
@@ -842,10 +843,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 7399329031447773022}
   stateType: 5
+  _sight: {fileID: 3442696871766045562}
   pursueSpeed: 5
   attackRange: 2
-  solver: {fileID: 5436425012766778036}
+  obstaclesAgents:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _avoidanceAngle: 140
+  _minimunAvoidanceRadius: 1.2
+  _maximunAvoidanceRadius: 2
+  AvoidanceWeightModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.794406
+      outSlope: -2.794406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07243071
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11710125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   debug_this: 0
+  ShowAvoidance: 0
+  ShowMinAvoidanceRadius: 0
+  ShowMaxAvoidanceRadius: 0
+  debug_AvoidanceColorLabel: {r: 1, g: 0.4116228, b: 0, a: 1}
+  debug_MinimunAvoidanceDistanceColor: {r: 1, g: 0.27785218, b: 0, a: 1}
+  debug_MaximunAvoidanceDistanceColor: {r: 1, g: 0.5087234, b: 0, a: 1}
 --- !u!114 &2472048980727213209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +906,7 @@ MonoBehaviour:
   Animations:
   - Attack
   - Attack 2
+  debugThis: 0
   drawAttackRange: 0
 --- !u!114 &2472048980727213202
 MonoBehaviour:
@@ -887,6 +925,20 @@ MonoBehaviour:
   collisions:
   - {fileID: 9205544783296072050}
   multipleDeads: 1
+--- !u!114 &7803306624203270315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472048980727213203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d615f549ae509444791db8069d823510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anims: {fileID: 7399329031447773022}
+  stateType: 8
 --- !u!1 &2593746553427275123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,6 +2669,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  AlertStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AlertEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7677828486635557480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,12 +3235,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5270bbb40beb3749828e290afef2a47, type: 3}
---- !u!224 &582946303700416858 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2012240174569268190, guid: e5270bbb40beb3749828e290afef2a47,
-    type: 3}
-  m_PrefabInstance: {fileID: 1439994456274639492}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &582946303700416862 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2012240174569268186, guid: e5270bbb40beb3749828e290afef2a47,
@@ -3195,3 +3247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9797763bd9e75eb42b6254185166c7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &582946303700416858 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2012240174569268190, guid: e5270bbb40beb3749828e290afef2a47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1439994456274639492}
+  m_PrefabAsset: {fileID: 0}

@@ -290,6 +290,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  AlertStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AlertEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8449014663986936895
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +357,7 @@ MonoBehaviour:
   healthDisplay: {fileID: 4139187848024929438}
   ManagerSound: {fileID: 5532085607088089061}
   HurtSoundS: {fileID: 8300000, guid: ab3857351263d644eb4c3d0c3477173c, type: 3}
-  DyingSoundS: {fileID: 0}
+  DyingSoundS: {fileID: 8300000, guid: 3bf8fc79983414a43a9540181fce194f, type: 3}
   debug_currentState: 0
   debug_this: 0
 --- !u!114 &354888396
@@ -428,10 +434,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anims: {fileID: 8956068181170954067}
   stateType: 5
+  _sight: {fileID: 354888396}
   pursueSpeed: 5
   attackRange: 2
-  solver: {fileID: 354888394}
+  obstaclesAgents:
+    serializedVersion: 2
+    m_Bits: 2560
+  _avoidanceAngle: 140
+  _minimunAvoidanceRadius: 1.2
+  _maximunAvoidanceRadius: 2
+  AvoidanceWeightModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.794406
+      outSlope: -2.794406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07243071
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11710125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   debug_this: 0
+  ShowAvoidance: 0
+  ShowMinAvoidanceRadius: 0
+  ShowMaxAvoidanceRadius: 0
+  debug_AvoidanceColorLabel: {r: 1, g: 0.2538727, b: 0, a: 1}
+  debug_MinimunAvoidanceDistanceColor: {r: 1, g: 0.1876287, b: 0, a: 1}
+  debug_MaximunAvoidanceDistanceColor: {r: 1, g: 0.5013487, b: 0, a: 1}
 --- !u!114 &199556045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +497,7 @@ MonoBehaviour:
   Animations:
   - Attack
   - Attack 2
+  debugThis: 0
   drawAttackRange: 0
 --- !u!114 &199556046
 MonoBehaviour:

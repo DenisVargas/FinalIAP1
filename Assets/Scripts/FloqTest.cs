@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +15,7 @@ public class FloqTest : MonoBehaviour
     [SerializeField] float _minimunAvoidanceAngle = 1f;
     [SerializeField] float _minimunAvoidanceRadius = 2f;
     [SerializeField] float _maximunAvoidanceRadius = 2f;
-    [SerializeField] AnimationCurve AvoidanceWeightModifier = AnimationCurve.Linear(0,0,1,1);
+    [SerializeField] AnimationCurve AvoidanceWeightModifier = AnimationCurve.Linear(0, 0, 1, 1);
 
     [SerializeField] Color angleColor = Color.white;
 
@@ -76,7 +78,7 @@ public class FloqTest : MonoBehaviour
         {
             Gizmos.color = debug_FlockingDistanceColor;
             Gizmos.matrix = Matrix4x4.Scale(new Vector3(1, 0, 1));
-            Gizmos.DrawWireSphere(transform.position, _floqRadius); 
+            Gizmos.DrawWireSphere(transform.position, _floqRadius);
         }
         if (ShowLeaderDirection)
         {
@@ -213,7 +215,7 @@ public class FloqTest : MonoBehaviour
         if (distToLeader < 2)
         {
             //transform.forward = ((EndResult + Alligment).normalized).YComponent(0); //El componente forward debería ser algo que se actualiza en el tiempo.
-            transform.forward = Vector3.Slerp(transform.forward, ((EndResult + Alligment).normalized).YComponent(0), 0.5f) ; //El componente forward debería ser algo que se actualiza en el tiempo.
+            transform.forward = Vector3.Slerp(transform.forward, ((EndResult + Alligment).normalized).YComponent(0), 0.5f); //El componente forward debería ser algo que se actualiza en el tiempo.
         }
     }
 
@@ -238,3 +240,4 @@ public class FloqTest : MonoBehaviour
         return allies;
     }
 }
+#endif

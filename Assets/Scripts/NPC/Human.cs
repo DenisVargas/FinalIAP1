@@ -48,6 +48,7 @@ public class Human : NPC
         var attack = GetComponent<AttackState>();
         attack.swithStateTo = _states.Feed;
         attack.getCurrentTarget = getTarget;
+        attack.OnApplyDamage = onHit;
         attack.AttachTo(_states);
 
         var dead = GetComponent<DeadState>();
@@ -83,7 +84,7 @@ public class Human : NPC
             return result;
         }
 
-        Debug.Log($"{gameObject.name} ha recibido daño.");
+        //Debug.Log($"{gameObject.name} ha recibido daño.");
 
         health = (health - inputDamage.damageAmmount);
         if (health < 0)
@@ -100,7 +101,7 @@ public class Human : NPC
                 print("Debugging");
             DyingSound();
 
-            Debug.Log($"{gameObject.name} ha morido.");
+            //Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
             healthDisplay.FadeOut();
             OnDie(this);
@@ -125,8 +126,11 @@ public class Human : NPC
         if (hitResult.killed)
         {
             //Busco un nuevo target, porque el actual ha morido!
-            currentTarget = null;
-            _states.Feed(CommonState.idle);
+            currentTarget = FindCloserTarget("Zombie", sight.range, sight.visibles);
+            if (currentTarget != null)
+                _states.Feed(CommonState.pursue);//Encontramos un objetivo
+            else
+                _states.Feed(CommonState.idle);
         }
     }
 
