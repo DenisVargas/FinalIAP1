@@ -4,7 +4,6 @@ using System.Collections;
 
 public class DeadState : State
 {
-    
     [SerializeField] Collider[] collisions = new Collider[0];
     [SerializeField] bool multipleDeads = false;
 
@@ -32,6 +31,18 @@ public class DeadState : State
 
         foreach (var item in collisions)
             item.enabled = false;
+
+        var zombie = GetComponent<Zombie>();
+        if (zombie)
+        {
+            LevelManager.ins.TrackZombie(zombie);
+        }
+        else
+        {
+            var human = GetComponent<Human>();
+            LevelManager.ins.TrackHuman(human);
+        }
+        
 
         StartCoroutine(delayedDestroy());
     }

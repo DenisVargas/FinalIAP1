@@ -130,8 +130,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] TMP_Text SurvivorCount_text = null;
     [SerializeField] TMP_Text ZombieCount_text = null;
 
-    int _survivorsLeft = 2;
-    int _zombiesLeft = 2;
+    int _survivorsLeft = 0;
+    int _zombiesLeft = 0;
 
     public int SurvivorsCount
     {
@@ -140,7 +140,7 @@ public class LevelManager : MonoBehaviour
         {
             _survivorsLeft = value;
             if (SurvivorCount_text != null)
-                SurvivorCount_text.text = $"Zombies Left: {_survivorsLeft}";
+                SurvivorCount_text.text = $"humans Left: {_survivorsLeft}";
         }
     }
     public int ZombiesCount
@@ -197,9 +197,25 @@ public class LevelManager : MonoBehaviour
         Frecuency = float.Parse(value);
     }
 
-    public void RegisterHuman(Human reference)
+    public void TrackHuman(Human reference)
     {
+        if (reference.IsAlive)
+            SurvivorsCount++;
+        else
+            SurvivorsCount--;
 
+        if (SurvivorsCount <= 0)
+            OnGameEnded(faction.zombie);
+    }
+    public void TrackZombie(Zombie reference)
+    {
+        if (reference.IsAlive)
+            ZombiesCount++;
+        else
+            ZombiesCount--;
+
+        if (ZombiesCount <= 0)
+            OnGameEnded(faction.human);
     }
 
     public void StartGame()

@@ -42,6 +42,7 @@ public class HumanSpawner : MonoBehaviour
 
             human.transform.position = transform.position + GetrandomPositionInCircle(MinSpawnRange, SpawnRange);
             //Acá tenemos acceso a cada humanito.
+            LevelManager.ins.TrackHuman(human);
         }
     }
 

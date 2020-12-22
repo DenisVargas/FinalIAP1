@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 8449014663986936895, guid: 9b965a1ae5ad0844d9e4e79010c0846d, type: 3}
   - {fileID: 1032641184500318824, guid: a5155a417151ae242a9ef749a84f4371, type: 3}
   - {fileID: 916111371054503623, guid: 12099f54c798116408f119badc75070f, type: 3}
-  spawnAtStart: 1
+  spawnAtStart: 0
   Ammount: 3
   SpawnRange: 2
   MinSpawnRange: 0

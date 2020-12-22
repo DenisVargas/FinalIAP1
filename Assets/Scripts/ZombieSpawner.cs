@@ -49,9 +49,11 @@ public class ZombieSpawner : MonoBehaviour
             zombies.Add(zombi);
 
             zombi.transform.position = transform.position + GetrandomPositionInCircle(MinSpawnRange, SpawnRange);
+            LevelManager.ins.TrackZombie(zombi);
         }
 
         var liderDePelotón = Instantiate(ZombieLeaderPrefab).GetComponent<Zombie>();
+        LevelManager.ins.TrackZombie(liderDePelotón);
 
         //Creo los grupos!
         foreach (var zombi in zombies)
