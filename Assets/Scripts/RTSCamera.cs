@@ -7,6 +7,7 @@ public class RTSCamera : MonoBehaviour {
     public Vector3 targetLock;
     public bool freeCamera = true;
     public bool lockToTargets = false;
+    public bool lockInput = false;
 
     [SerializeField] private float CameraSpanVelocity;
     [SerializeField] private float panBorderThickness;
@@ -26,11 +27,12 @@ public class RTSCamera : MonoBehaviour {
         var BNormal = operativeCamera.transform.forward;
         ZoomMin = ZoomMax + BNormal * ZoomDist;
     }
-    void Update () {
-        if (Input.GetKey(KeyCode.Space))
-            lockToTargets = true;
-        if (Input.GetKeyUp(KeyCode.Space))
-            lockToTargets = false;
+    void Update ()
+    {
+        if (lockInput) return;
+
+        if (Input.GetKeyDown(KeyCode.Y))
+            lockToTargets = !lockToTargets;
 
         #region Movimiento
 
