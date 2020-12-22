@@ -59,4 +59,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 #Custom Ignores
-/[Aa]ssets/Models*
+Assets/Models/Humans/Hunk/Hunk.fbx
+Assets/Models/Zombies/Romero/Romero.fbx
