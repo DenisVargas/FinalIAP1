@@ -10,6 +10,10 @@ public class LevelManager : MonoBehaviour
     [Header("Main Settings")]
     [SerializeField] RTSCamera _cameraController = null;
 
+    [Header("Win and Defeat Conditions")]
+    [SerializeField] GameObject SurvivorWinMenu = null;
+    [SerializeField] GameObject ZombieWinMenu = null;
+
     [Header("Initialization Menu")]  //InitializationMenu
     [SerializeField] GameObject InitializationMenu = null;
 
@@ -208,6 +212,29 @@ public class LevelManager : MonoBehaviour
         else
 #endif
             Application.Quit();
+    }
+
+    enum faction
+    {
+        human,
+        zombie
+    }
+    void OnGameEnded(faction winner)
+    {
+        InitializationMenu.SetActive(false);
+        GameplayMenu.SetActive(false);
+
+        switch (winner)
+        {
+            case faction.human:
+                SurvivorWinMenu.SetActive(true);
+                break;
+            case faction.zombie:
+                ZombieWinMenu.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 }
 
