@@ -6,6 +6,10 @@ using System;
 
 public class Human : NPC
 {
+    [Header("Sonido")]
+    [SerializeField] private AudioSource ManagerSound;
+    [SerializeField] private AudioClip HurtSoundS;
+    [SerializeField] private AudioClip DyingSoundS;
     IDamageable<Damage, HitResult> currentTarget = null;
 
     public CommonState debug_currentState;
@@ -87,11 +91,14 @@ public class Human : NPC
 
         if (healthDisplay)
             healthDisplay.value = ((float)health) / ((float)maxhealth);
+        HurtSound();
+
 
         if (health <= 0)
         {
             if (debug_this)
                 print("Debugging");
+            DyingSound();
 
             Debug.Log($"{gameObject.name} ha morido.");
             result.killed = true;
@@ -121,5 +128,14 @@ public class Human : NPC
             currentTarget = null;
             _states.Feed(CommonState.idle);
         }
+    }
+
+    void HurtSound()
+    {
+        ManagerSound.PlayOneShot(HurtSoundS);
+    }
+    void DyingSound()
+    {
+        ManagerSound.PlayOneShot(DyingSoundS);
     }
 }
