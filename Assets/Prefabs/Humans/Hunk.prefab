@@ -354,9 +354,9 @@ MonoBehaviour:
   visibles:
     serializedVersion: 2
     m_Bits: 4608
-  range: 5
-  angle: 75
-  Debug_LineOfSight: 0
+  range: 8
+  angle: 360
+  Debug_LineOfSight: 1
   rangeColor: {r: 0.8584906, g: 0.28092963, b: 0, a: 1}
   angleColor: {r: 1, g: 1, b: 1, a: 1}
   positionDiference: {x: 0, y: 0, z: 0}
@@ -436,7 +436,7 @@ MonoBehaviour:
   attackRange: 4
   damage:
     source: {fileID: 0}
-    damageAmmount: 2
+    damageAmmount: 15
   Animations:
   - Attack
   drawAttackRange: 0
