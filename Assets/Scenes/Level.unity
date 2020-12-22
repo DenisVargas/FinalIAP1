@@ -37246,5 +37246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HumanSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 7453651269165384979, guid: 6ab456331d77af549910be4c4e5555e5,
+        type: 3}
+      propertyPath: SpawnRange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab456331d77af549910be4c4e5555e5, type: 3}
