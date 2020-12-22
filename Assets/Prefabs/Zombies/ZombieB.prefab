@@ -1401,7 +1401,7 @@ MonoBehaviour:
   healthDisplay: {fileID: 7275822380770945220}
   ManagerSound: {fileID: 8244312363882893285}
   HurtSoundS: {fileID: 8300000, guid: 19013fae5c66f6242a417a9a90321fff, type: 3}
-  DyingSoundS: {fileID: 8300000, guid: adc3a4ad9eeb5e2428a052eceac471a8, type: 3}
+  DyingSoundS: {fileID: 8300000, guid: 3d2130050d67a0e4c981cd4eb73b1ea7, type: 3}
   _initialTarget: {fileID: 0}
   isCaptain: 0
   _isIndependant: 0
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   _anims: {fileID: 738680463982145220}
   stateType: 3
   ManagerSound: {fileID: 8244312363882893285}
-  AttackSoundS: {fileID: 8300000, guid: d60bd384b69963242a8fe001f0220d20, type: 3}
+  AttackSoundS: {fileID: 8300000, guid: c54606215df46d543a43aab4b75ee99c, type: 3}
   attackRange: 1.5
   damage:
     source: {fileID: 0}

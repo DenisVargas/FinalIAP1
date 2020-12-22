@@ -447,7 +447,7 @@ MonoBehaviour:
   _anims: {fileID: 8956068181170954067}
   stateType: 3
   ManagerSound: {fileID: 5532085607088089061}
-  AttackSoundS: {fileID: 0}
+  AttackSoundS: {fileID: 8300000, guid: 02df1c9a838561f43a6250070eb0baf4, type: 3}
   attackRange: 1.5
   damage:
     source: {fileID: 0}

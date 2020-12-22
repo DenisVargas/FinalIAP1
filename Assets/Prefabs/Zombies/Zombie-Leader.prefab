@@ -257,7 +257,7 @@ MonoBehaviour:
   healthDisplay: {fileID: 4162590018211430663}
   ManagerSound: {fileID: 5012751823461462122}
   HurtSoundS: {fileID: 8300000, guid: 19013fae5c66f6242a417a9a90321fff, type: 3}
-  DyingSoundS: {fileID: 8300000, guid: adc3a4ad9eeb5e2428a052eceac471a8, type: 3}
+  DyingSoundS: {fileID: 8300000, guid: 928fbe09a9788f44abdd277183eb13f2, type: 3}
   _initialTarget: {fileID: 0}
   isCaptain: 0
   _isIndependant: 0
