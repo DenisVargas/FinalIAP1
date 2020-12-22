@@ -336,7 +336,7 @@ MonoBehaviour:
   healthDisplay: {fileID: 4649712664703147622}
   ManagerSound: {fileID: 1640320700983555716}
   HurtSoundS: {fileID: 8300000, guid: 284a5ac3ce7ea26429c9e3afc095db70, type: 3}
-  DyingSoundS: {fileID: 0}
+  DyingSoundS: {fileID: 8300000, guid: 3bf8fc79983414a43a9540181fce194f, type: 3}
   debug_currentState: 0
   debug_this: 0
 --- !u!114 &8788282513823924276
