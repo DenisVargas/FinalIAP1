@@ -155,7 +155,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
     [SerializeField] HumanSpawner humanSpawner = null;
     public ZombieSpawner[] zombieSpawners = null;
 
