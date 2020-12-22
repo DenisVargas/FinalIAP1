@@ -451,7 +451,7 @@ MonoBehaviour:
   attackRange: 1.5
   damage:
     source: {fileID: 0}
-    damageAmmount: 8
+    damageAmmount: 10
   Animations:
   - Attack
   - Attack 2
